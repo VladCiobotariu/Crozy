@@ -1,0 +1,1 @@
+If SchemaChangeTest fails, check in snapshot folder for mismatch schema, if you are happy with the change made, drop the mismatched schema intro snapshot folder and run the test again. Now everything should work.

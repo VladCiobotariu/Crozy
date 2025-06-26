@@ -1,0 +1,23 @@
+﻿{
+  "ConnectionStrings": {
+    "CrozyMigrationsApp": "Host=localhost;Password=oSyX-ATUL-329",
+    "CrozyMigrationsSuperUser": "Host=localhost;Username=postgres;Password=azuBIok32"
+  },
+  //"action": "migrate",
+  "action": "create-database",
+  //"action": "drop-database",
+  "DbAuthMode": "UserPassword",
+  "AZURE_CLIENT_ID": "<azure_client_id>",
+  "AZURE_TENANT_ID": "<azure_tenant_id>",
+  "AppEnvironment": "local",
+  "ApplicationUsers": {
+    "PasswordBased": {
+      "AppUser": {
+        "Password": "aZuL-0-We"
+      },
+      "MigrationUser": {
+        "Password": "oSyX-ATUL-329"
+      }
+    }
+  }
+}

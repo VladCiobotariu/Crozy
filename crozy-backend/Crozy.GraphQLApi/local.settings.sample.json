@@ -1,0 +1,48 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_EXTENSION_VERSION": "~4",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "AZURE_CLIENT_ID": "",
+        "AZURE_TENANT_ID": "",
+        "AZURE_CLIENT_SECRET": "",
+        "ImageStorage__ServiceUri": "ImageStorage__ServiceUri",
+        "GraphQL__ImageServiceEndpoint": "GraphQL__ImageServiceEndpoint",
+        "MEDIA_STORAGE_PROVIDER": "S3",  //S3 or Azure
+//        "AWS": {
+//            "Region": "fr-par",
+//            "AccessKey": "SCWWV87931MQFFA0XN45",
+//            "SecretKey": "cb72a63d-653b-4683-82c5-c6144537d836"
+//        },
+        "SLACK_TOKEN": "your_slack_app_tocken",
+        "SlackChannelName": "your_slack_app_channel",
+        "AdminHostUrl": "http://localhost:3000",
+        "RunInMemoryDB": false,
+        "DbAuthMode": "UserPassword",
+        "AzureAdB2C__Instance": "AzureAdB2C__Instance",
+        "AzureAdB2C__ClientId": "AzureAdB2C__ClientId",
+        "AzureAdB2C__Domain": "AzureAdB2C__Domain",
+        "AzureAdB2C__SignedOutCallbackPath": "/signout/B2C_1_susi",
+        "AzureAdB2C__SignUpSignInPolicyId": "B2C_1_susi",
+        "AzureAdB2C__TenantId": "common",
+        "PingTimerFunction": false,
+        "PingUri": "http://localhost:7071/api/graphql?sdl",
+        "EmailService__Endpoint": "EmailService__Endpoint",
+        "EmailService__Credential__Key": "EmailService__Credential__Key",
+        "SendersEmail": "DoNotReply@[domain-name]",
+        "Netopia__PrivateKey": "Netopia__PrivateKey",
+        "Netopia__PublicKey": "Netopia__PublicKey",
+        "Netopia__Signature": "Netopia__Signature",
+        "Netopia__PaymentUri": "http://sandboxsecure.mobilpay.ro",
+        "Netopia__ConfirmUri": "https://[ngrok-id].ngrok-free.app/api/payments/netopia/confirmation",
+        "Netopia__ReturnUri": "http://localhost:3001/payments/success",
+        "SeedOptions__DbSeedEnabled":  true
+    },
+    "ConnectionStrings": {
+        "POSTGRESQLCONNSTR_CrozyAppDb": "Host=localhost:5432;Database=crozy-local;IncludeErrorDetail=True;Username=crozy_app_local_usr;Password=aZuL-0-We"
+    },
+    "Host": {
+        "CORS": "*"
+    }
+}

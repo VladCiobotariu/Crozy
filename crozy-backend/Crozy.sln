@@ -1,0 +1,119 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.GraphQL", "Crozy.GraphQl\Crozy.GraphQL.csproj", "{17075F80-D8CD-4F7A-AAF4-4EFA3E4ED927}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Domain", "Crozy.Domain\Crozy.Domain.csproj", "{51BCD47F-F2DC-4D9A-AC1F-6EB75144FC24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Infrastructure", "Crozy.Infrastructure\Crozy.Infrastructure.csproj", "{2C83F922-80EE-42B7-A124-7AB1CEA9149C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cicd", "cicd", "{BEC65CDF-DEDD-4624-ADDB-477DBCA12463}"
+	ProjectSection(SolutionItems) = preProject
+		cicd\azure-pipelines-for-deploy.yml = cicd\azure-pipelines-for-deploy.yml
+		cicd\azure-pipelines-for-pr.yml = cicd\azure-pipelines-for-pr.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Infrastructure.Application", "Crozy.Infrastructure.Application\Crozy.Infrastructure.Application.csproj", "{9A49861B-0544-4A4E-90DF-537363667161}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Messaging", "Crozy.Messaging\Crozy.Messaging.csproj", "{38A5DBCC-5EB6-41C7-8075-94F30A71C9D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7CA44223-A067-49EF-8DB5-BD336BDC3470}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Domain.Tests", "Crozy.Domain.Tests\Crozy.Domain.Tests.csproj", "{999028AF-2B9A-4701-9A70-AC2770B236B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.GraphQL.Tests", "Crozy.GraphQL.Tests\Crozy.GraphQL.Tests.csproj", "{AEB99F28-14A0-48FB-909F-360118B3C7CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.GraphQLApi", "Crozy.GraphQLApi\Crozy.GraphQLApi.csproj", "{775A0C27-3A9C-463C-B0F6-AF265A4E1A22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{B4C007E0-7A69-4C77-A290-6D8D09F2C8FC}"
+	ProjectSection(SolutionItems) = preProject
+		cicd\templates\build-jobs.yml = cicd\templates\build-jobs.yml
+		cicd\templates\deploy-template.yml = cicd\templates\deploy-template.yml
+		cicd\templates\variables.yml = cicd\templates\variables.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.DbMigration.App", "Crozy.DbMigration.App\Crozy.DbMigration.App.csproj", "{02ADEFB3-B478-4EDC-9467-9632B08B1484}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.DbMigrations", "Crozy.DbMigrations\Crozy.DbMigrations.csproj", "{9331FE98-4715-438A-B4FC-965164D69956}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Infrastructure.PostgreSQL", "Crozy.Infrastructure.PostgreSQL\Crozy.Infrastructure.PostgreSQL.csproj", "{B44E1F8E-ED21-4841-AE6F-58370982A3E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Payments.Netopia", "Crozy.Payments.Netopia\Crozy.Payments.Netopia.csproj", "{9963AB11-5FEE-4CAD-8EDA-D070F3EE853E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crozy.Payments.Netopia.Tests", "Crozy.Payments.Netopia.Tests\Crozy.Payments.Netopia.Tests.csproj", "{C05CB0FF-872C-415C-9198-B681BBA1C982}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17075F80-D8CD-4F7A-AAF4-4EFA3E4ED927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17075F80-D8CD-4F7A-AAF4-4EFA3E4ED927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17075F80-D8CD-4F7A-AAF4-4EFA3E4ED927}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17075F80-D8CD-4F7A-AAF4-4EFA3E4ED927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51BCD47F-F2DC-4D9A-AC1F-6EB75144FC24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BCD47F-F2DC-4D9A-AC1F-6EB75144FC24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BCD47F-F2DC-4D9A-AC1F-6EB75144FC24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BCD47F-F2DC-4D9A-AC1F-6EB75144FC24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C83F922-80EE-42B7-A124-7AB1CEA9149C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C83F922-80EE-42B7-A124-7AB1CEA9149C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C83F922-80EE-42B7-A124-7AB1CEA9149C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C83F922-80EE-42B7-A124-7AB1CEA9149C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A49861B-0544-4A4E-90DF-537363667161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A49861B-0544-4A4E-90DF-537363667161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A49861B-0544-4A4E-90DF-537363667161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A49861B-0544-4A4E-90DF-537363667161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38A5DBCC-5EB6-41C7-8075-94F30A71C9D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A5DBCC-5EB6-41C7-8075-94F30A71C9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A5DBCC-5EB6-41C7-8075-94F30A71C9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A5DBCC-5EB6-41C7-8075-94F30A71C9D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{999028AF-2B9A-4701-9A70-AC2770B236B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{999028AF-2B9A-4701-9A70-AC2770B236B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{999028AF-2B9A-4701-9A70-AC2770B236B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{999028AF-2B9A-4701-9A70-AC2770B236B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB99F28-14A0-48FB-909F-360118B3C7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB99F28-14A0-48FB-909F-360118B3C7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB99F28-14A0-48FB-909F-360118B3C7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB99F28-14A0-48FB-909F-360118B3C7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775A0C27-3A9C-463C-B0F6-AF265A4E1A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775A0C27-3A9C-463C-B0F6-AF265A4E1A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775A0C27-3A9C-463C-B0F6-AF265A4E1A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775A0C27-3A9C-463C-B0F6-AF265A4E1A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02ADEFB3-B478-4EDC-9467-9632B08B1484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02ADEFB3-B478-4EDC-9467-9632B08B1484}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02ADEFB3-B478-4EDC-9467-9632B08B1484}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02ADEFB3-B478-4EDC-9467-9632B08B1484}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9331FE98-4715-438A-B4FC-965164D69956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9331FE98-4715-438A-B4FC-965164D69956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9331FE98-4715-438A-B4FC-965164D69956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9331FE98-4715-438A-B4FC-965164D69956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B44E1F8E-ED21-4841-AE6F-58370982A3E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B44E1F8E-ED21-4841-AE6F-58370982A3E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B44E1F8E-ED21-4841-AE6F-58370982A3E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B44E1F8E-ED21-4841-AE6F-58370982A3E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9963AB11-5FEE-4CAD-8EDA-D070F3EE853E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9963AB11-5FEE-4CAD-8EDA-D070F3EE853E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9963AB11-5FEE-4CAD-8EDA-D070F3EE853E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9963AB11-5FEE-4CAD-8EDA-D070F3EE853E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C05CB0FF-872C-415C-9198-B681BBA1C982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05CB0FF-872C-415C-9198-B681BBA1C982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05CB0FF-872C-415C-9198-B681BBA1C982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05CB0FF-872C-415C-9198-B681BBA1C982}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4C007E0-7A69-4C77-A290-6D8D09F2C8FC} = {BEC65CDF-DEDD-4624-ADDB-477DBCA12463}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9908A53-111D-4819-B1C5-189C7F073C33}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,1297 @@
+﻿schema {
+  query: Query
+  mutation: Mutation
+}
+
+"The node interface is implemented by entities that have a global unique identifier."
+interface Node {
+  id: ID!
+}
+
+type AcceptInvitationPayload {
+  invitationResult: InvitationResult
+  seller: Seller
+  errors: [UserError!]
+}
+
+type AddCategoryPayload {
+  category: Category
+  errors: [UserError!]
+}
+
+type AddExtraOptionCategoryPayload {
+  extraOptionCategory: ExtraOptionCategory
+  errors: [UserError!]
+}
+
+type AddExtraOptionPayload {
+  extraOption: ExtraOption
+  errors: [UserError!]
+}
+
+type AddImagePayload {
+  image: Image
+  errors: [UserError!]
+}
+
+type AddOrderPayload {
+  order: Order
+  errors: [UserError!]
+}
+
+type AddProductPayload {
+  product: Product
+  errors: [UserError!]
+}
+
+type AddSitePayload {
+  site: Site
+  errors: [UserError!]
+}
+
+type Address {
+  country: String!
+  region: String!
+  city: String!
+  line1: String!
+  line2: String
+  displayName: String
+}
+
+"A connection to a list of items."
+type AllExtraOptionsCategoriesForCurrentOrganisationConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [AllExtraOptionsCategoriesForCurrentOrganisationEdge!]
+  "A flattened list of the nodes."
+  nodes: [ExtraOptionCategory!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type AllExtraOptionsCategoriesForCurrentOrganisationEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: ExtraOptionCategory!
+}
+
+type Buyer implements Node {
+  id: ID!
+  userId: ID!
+}
+
+type CancelOrderPayload {
+  order: Order
+  errors: [UserError!]
+}
+
+"A connection to a list of items."
+type CategoriesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [CategoriesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Category!]
+}
+
+"An edge in a connection."
+type CategoriesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Category!
+}
+
+type Category implements Node {
+  id: ID!
+  organisationId: ID!
+  products("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [ProductSortInput!]): ProductsConnection
+  name: String!
+  slug: String!
+  description: String
+  displayNumber: Int!
+}
+
+type CompleteOrderPayload {
+  order: Order
+  errors: [UserError!]
+}
+
+type CustomerDetails {
+  email: String
+  phoneNumber: String
+  buyerId: ID
+  fullName: String!
+  firstName: String!
+  lastName: String!
+}
+
+type DeleteCategoryPayload {
+  deleted: Boolean!
+  errors: [UserError!]
+}
+
+type DeleteExtraOptionCategoryPayload {
+  deleted: Boolean!
+  errors: [UserError!]
+}
+
+type DeleteExtraOptionPayload {
+  deleted: Boolean!
+  errors: [UserError!]
+}
+
+type DeleteProductPayload {
+  deleted: Boolean!
+  errors: [UserError!]
+}
+
+type DeleteSitePayload {
+  deleted: Boolean!
+  errors: [UserError!]
+}
+
+type ExtraOption {
+  id: ID!
+  extraOptionCategoryId: ID!
+  category: ExtraOptionCategory
+  name: String!
+  price: Money!
+}
+
+type ExtraOptionByIdPayload {
+  extraOption: ExtraOption
+  errors: [UserError!]
+}
+
+type ExtraOptionCategory {
+  id: ID!
+  extraOptions("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [ExtraOptionSortInput!]): ExtraOptionsConnection
+  name: String!
+}
+
+type ExtraOptionCategoryByIdPayload {
+  extraOptionCategory: ExtraOptionCategory
+  errors: [UserError!]
+}
+
+"A connection to a list of items."
+type ExtraOptionsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [ExtraOptionsEdge!]
+  "A flattened list of the nodes."
+  nodes: [ExtraOption!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type ExtraOptionsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: ExtraOption!
+}
+
+"A connection to a list of items."
+type ExtraOptionsForCurrentOrganisationConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [ExtraOptionsForCurrentOrganisationEdge!]
+  "A flattened list of the nodes."
+  nodes: [ExtraOption!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type ExtraOptionsForCurrentOrganisationEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: ExtraOption!
+}
+
+type Image {
+  url: String!
+  name: String!
+}
+
+type Invitation {
+  email: String
+  invitationCode: String!
+  invitationState: InvitationState!
+  role: Role!
+  invitationDate: DateTime!
+}
+
+type InviteUserPayload {
+  seller: Seller
+  errors: [UserError!]
+}
+
+"A connection to a list of items."
+type ItemsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [ItemsEdge!]
+  "A flattened list of the nodes."
+  nodes: [OrderItem!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type ItemsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: OrderItem!
+}
+
+type Money {
+  amount: Decimal!
+  currency: Currency!
+}
+
+type Mutation {
+  addOrderForMe(input: AddOrderInput!): AddOrderPayload!
+  startOrderProcessing(input: StartOrderProcessingInput!): StartOrderProcessingPayload! @authorize(policy: "IsSeller")
+  completeOrder(input: CompleteOrderInput!): CompleteOrderPayload! @authorize(policy: "IsSeller")
+  cancelOrder(input: CancelOrderInput!): CancelOrderPayload! @authorize(policy: "IsSeller")
+  addSite(input: AddSiteInput!): AddSitePayload! @authorize(policy: "CanCreateOrganisationEntities")
+  updateSite(input: UpdateSiteInput!): UpdateSitePayload! @authorize(policy: "IsSeller")
+  deleteSite(input: DeleteSiteInput!): DeleteSitePayload! @authorize(policy: "IsSeller")
+  addCategory(input: AddCategoryInput!): AddCategoryPayload! @authorize(policy: "CanCreateOrganisationEntities")
+  updateCategory(input: UpdateCategoryInput!): UpdateCategoryPayload! @authorize(policy: "IsSeller")
+  deleteCategory(input: DeleteCategoryInput!): DeleteCategoryPayload! @authorize(policy: "IsSeller")
+  addProduct(input: AddProductInput!): AddProductPayload! @authorize(policy: "IsSeller")
+  updateProduct(input: UpdateProductInput!): UpdateProductPayload! @authorize(policy: "IsSeller")
+  deleteProduct(input: DeleteProductInput!): DeleteProductPayload! @authorize(policy: "IsSeller")
+  onBuyerSignIn: OnBuyerSignInPayload! @authorize
+  addImage(input: AddImageInput!): AddImagePayload! @authorize(policy: "IsSeller")
+  inviteSeller(input: InviteSellerInput!): InviteUserPayload! @authorize
+  acceptInvitation(input: AcceptInvitationInput!): AcceptInvitationPayload!
+  removeSeller(input: RemoveSellerInput!): RemoveSellerPayload! @authorize
+  onSellerSignIn: OnSellerSignInPayload!
+  createPaymentData(input: CreatePaymentDataInput!): PaymentDataResult!
+  addExtraOptionCategory(input: AddExtraOptionCategoryInput!): AddExtraOptionCategoryPayload! @authorize(policy: "CanCreateOrganisationEntities")
+  updateExtraOptionCategory(input: UpdateExtraOptionCategoryInput!): UpdateExtraOptionCategoryPayload! @authorize(policy: "IsSeller")
+  deleteExtraOptionCategory(input: DeleteExtraOptionCategoryInput!): DeleteExtraOptionCategoryPayload! @authorize(policy: "IsSeller")
+  addExtraOption(input: AddExtraOptionInput!): AddExtraOptionPayload! @authorize(policy: "CanCreateOrganisationEntities")
+  updateExtraOption(input: UpdateExtraOptionInput!): UpdateExtraOptionPayload! @authorize(policy: "IsSeller")
+  deleteExtraOption(input: DeleteExtraOptionInput!): DeleteExtraOptionPayload! @authorize(policy: "IsSeller")
+}
+
+type OnBuyerSignInPayload {
+  buyer: Buyer
+  errors: [UserError!]
+}
+
+type OnSellerSignInPayload {
+  seller: Seller
+  errors: [UserError!]
+}
+
+type Order implements Node @authorize(policy: "CanViewOrder", apply: AFTER_RESOLVER) {
+  id: ID!
+  siteId: ID!
+  organisationId: ID!
+  items("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String): ItemsConnection
+  customerDetails: CustomerDetails!
+  orderDateTime: DateTime!
+  number: String!
+  customerNotes: String
+  stateDescription: OrderStateDescription!
+  shippingAddress: Address!
+  totalPrice: Money!
+  paymentState: PaymentState!
+  isWaitingForPayment: Boolean!
+  belongsToAnonymousUser: Boolean!
+}
+
+type OrderByIdPayload {
+  order: Order
+  errors: [UserError!]
+}
+
+type OrderItem implements Node {
+  id: ID!
+  orderId: ID!
+  productId: ID
+  image: Image
+  product: Product
+  productName: String!
+  productPrice: Money!
+  orderItemTotalPrice: Money!
+  quantity: Decimal!
+  productDescription: String
+  organisationId: Long!
+  extraOptions: [OrderItemExtraOption!]!
+}
+
+type OrderItemExtraOption {
+  name: String!
+  price: Money!
+  extraOptionId: Long
+}
+
+type OrderStateDescription {
+  orderState: OrderState!
+  stateChangeDescription: String
+  isOpen: Boolean!
+}
+
+"A connection to a list of items."
+type OrdersConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [OrdersEdge!]
+  "A flattened list of the nodes."
+  nodes: [Order!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type OrdersEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Order!
+}
+
+"A connection to a list of items."
+type OrdersForMeConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [OrdersForMeEdge!]
+  "A flattened list of the nodes."
+  nodes: [Order!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type OrdersForMeEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Order!
+}
+
+type OrdersSummaryPayload {
+  newOrders: Int!
+  processingOrders: Int!
+  errors: [UserError!]
+}
+
+type Organisation implements Node {
+  id: ID!
+  sellers: [Seller!]!
+  name: String!
+}
+
+type OrganisationByIdResult {
+  organisation: Organisation
+  errors: [UserError!]
+}
+
+"A connection to a list of items."
+type OrganisationsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [OrganisationsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Organisation!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type OrganisationsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Organisation!
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+type PaymentData {
+  data: String!
+  key: String!
+  iv: String!
+  cipher: String!
+  paymentUri: String!
+}
+
+type PaymentDataResult {
+  pymentData: PaymentData
+  errors: [UserError!]
+}
+
+type PaymentState {
+  paid(paymentMessageId: Long!): PaymentState!
+  type: PaymentType!
+  status: PaymentStatus!
+  paymentTransactionId: Long
+  canAcceptPayment: Boolean!
+}
+
+type PhoneNumber {
+  phone: String!
+}
+
+type Product implements Node {
+  id: ID!
+  siteId: ID!
+  organisationId: ID!
+  categories: [Category!]!
+  siteSummary: Site!
+  image: Image
+  extraOptions: [ExtraOption!]!
+  price: Money!
+  name: String!
+  slug: String!
+  description: String
+}
+
+"A connection to a list of items."
+type ProductsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [ProductsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Product!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type ProductsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Product!
+}
+
+type Query {
+  "Fetches an object given its ID."
+  node("ID of the object." id: ID!): Node
+  "Lookup nodes by a list of IDs."
+  nodes("The list of node IDs." ids: [ID!]!): [Node]!
+  userById(id: ID!): QueryUserPayload! @authorize
+  userByExternalId(externalId: String!): QueryUserPayload! @authorize
+  myUser: QueryUserPayload! @authorize
+  sites("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: SiteFilterInput order: [SiteSortInput!]): SitesConnection
+  siteById(id: ID!): Site!
+  siteBySlug(slug: String!): Site!
+  orders("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: OrderFilterInput order: [OrderSortInput!]): OrdersConnection @authorize(policy: "CanReadOrgEntities")
+  orderById(id: ID!): OrderByIdPayload! @authorize
+  ordersSummary: OrdersSummaryPayload! @authorize(policy: "CanReadOrgEntities")
+  ordersForMe("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [OrderSortInput!] where: OrderFilterInput): OrdersForMeConnection @authorize(policy: "IsCustomer")
+  organisations("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: OrganisationFilterInput order: [OrganisationSortInput!]): OrganisationsConnection
+  organisationById(input: GetOrganisationByIdInput!): OrganisationByIdResult!
+  products("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: ProductFilterInput order: [ProductSortInput!]): ProductsConnection
+  productById(id: ID!): Product!
+  productBySlug(siteSlug: String! productSlug: String!): Product!
+  categories("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: CategoryFilterInput order: [CategorySortInput!]): CategoriesConnection
+  categoryById(id: ID!): Category!
+  mySeller: SellerByIdResult! @authorize
+  allExtraOptionsForCurrentOrganisation: [ExtraOption!]!
+  extraOptionsForCurrentOrganisation("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [ExtraOptionSortInput!]): ExtraOptionsForCurrentOrganisationConnection
+  extraOptionById(id: ID!): ExtraOptionByIdPayload!
+  allExtraOptionsCategoriesForCurrentOrganisation("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [ExtraOptionCategorySortInput!]): AllExtraOptionsCategoriesForCurrentOrganisationConnection
+  extraOptionCategoryById(id: ID!): ExtraOptionCategoryByIdPayload!
+}
+
+type QueryUserPayload {
+  user: User
+  errors: [UserError!]
+}
+
+type RemoveSellerPayload {
+  deleted: Boolean!
+  errors: [UserError!]
+}
+
+type Seller implements Node @authorize(policy: "CanViewOrganisationFields", apply: AFTER_RESOLVER) {
+  id: ID!
+  organisation: Organisation!
+  user: User
+  organisationId: ID!
+  userId: ID
+  isSellerInvitationAccepted: Boolean!
+  invitation: Invitation
+  sellerState: SellerState!
+  role: Role!
+}
+
+type SellerByIdResult {
+  seller: Seller
+  errors: [UserError!]
+}
+
+type Site implements Node {
+  id: ID!
+  organisationId: ID!
+  categories("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String order: [CategorySortInput!]): CategoriesConnection
+  products("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String): ProductsConnection
+  name: String!
+  slug: String!
+  onlyPredeffinedDeliveryOptions: Boolean!
+  deliveryOptions: [Address!]!
+}
+
+type SiteSummary implements Node {
+  id: ID!
+  organisationId: Long!
+  name: String!
+  slug: String!
+  onlyPredeffinedDeliveryOptions: Boolean!
+  deliveryOptions: [Address!]!
+}
+
+"A connection to a list of items."
+type SitesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [SitesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Site!]
+}
+
+"An edge in a connection."
+type SitesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Site!
+}
+
+type StartOrderProcessingPayload {
+  order: Order
+  errors: [UserError!]
+}
+
+type UpdateCategoryPayload {
+  category: Category
+  errors: [UserError!]
+}
+
+type UpdateExtraOptionCategoryPayload {
+  extraOptionCategory: ExtraOptionCategory
+  errors: [UserError!]
+}
+
+type UpdateExtraOptionPayload {
+  extraOption: ExtraOption
+  errors: [UserError!]
+}
+
+type UpdateProductPayload {
+  product: Product
+  errors: [UserError!]
+}
+
+type UpdateSitePayload {
+  site: Site
+  errors: [UserError!]
+}
+
+type User implements Node @authorize(policy: "CanViewUserResource", apply: AFTER_RESOLVER) {
+  id: ID!
+  sellers: [Seller!]!
+  buyer: Buyer!
+  email: String
+  externalId: String!
+  firstName: String!
+  lastName: String!
+  phoneNumber: PhoneNumber
+}
+
+type UserError {
+  message: String!
+  code: String!
+}
+
+input AcceptInvitationInput {
+  invitationCode: String!
+}
+
+input AddCategoryInput {
+  name: String!
+  slug: String!
+  displayNumber: Int!
+  description: String
+}
+
+input AddExtraOptionCategoryInput {
+  name: String!
+}
+
+input AddExtraOptionInput {
+  name: String!
+  price: MoneyInput!
+  extraOptionCategoryId: ID!
+}
+
+input AddImageInput {
+  file: Upload!
+}
+
+input AddOrderInput {
+  siteId: ID!
+  shippingAddress: AddressInput!
+  items: [AddOrderItemInput!]!
+  customerDetails: CustomerDetailsInput!
+  paymentType: PaymentType!
+  customerNotes: String
+}
+
+input AddOrderItemInput {
+  productId: ID!
+  quantity: Decimal!
+  extraOptionsIds: [ID!]!
+}
+
+input AddProductInput {
+  siteId: ID!
+  name: String!
+  price: Decimal!
+  currency: Currency!
+  description: String
+  slug: String!
+  image: String
+  categoryIds: [ID!]!
+  extraOptionIds: [ID!]!
+}
+
+input AddSiteInput {
+  name: String!
+  slug: String!
+}
+
+input AddressFilterInput {
+  and: [AddressFilterInput!]
+  or: [AddressFilterInput!]
+  country: StringOperationFilterInput
+  region: StringOperationFilterInput
+  city: StringOperationFilterInput
+  line1: StringOperationFilterInput
+  line2: StringOperationFilterInput
+  displayName: StringOperationFilterInput
+}
+
+input AddressInput {
+  country: String!
+  region: String!
+  city: String!
+  line1: String!
+  line2: String
+  displayName: String
+}
+
+input AddressSortInput {
+  country: SortEnumType
+  region: SortEnumType
+  city: SortEnumType
+  line1: SortEnumType
+  line2: SortEnumType
+  displayName: SortEnumType
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input CancelOrderInput {
+  orderId: ID!
+  reason: String!
+}
+
+input CategoryFilterInput {
+  and: [CategoryFilterInput!]
+  or: [CategoryFilterInput!]
+  organisationId: IdOperationFilterInput
+  name: StringOperationFilterInput
+  slug: StringOperationFilterInput
+  description: StringOperationFilterInput
+  displayNumber: IntOperationFilterInput
+  id: LongOperationFilterInput
+}
+
+input CategorySortInput {
+  organisationId: SortEnumType
+  name: SortEnumType
+  slug: SortEnumType
+  description: SortEnumType
+  displayNumber: SortEnumType
+  id: SortEnumType
+}
+
+input CompleteOrderInput {
+  orderId: ID!
+}
+
+input CreatePaymentDataInput {
+  orderId: ID!
+}
+
+input CurrencyOperationFilterInput {
+  eq: Currency
+  neq: Currency
+  in: [Currency!]
+  nin: [Currency!]
+}
+
+input CustomerDetailsFilterInput {
+  and: [CustomerDetailsFilterInput!]
+  or: [CustomerDetailsFilterInput!]
+  fullName: StringOperationFilterInput
+  buyerId: LongOperationFilterInput
+  firstName: StringOperationFilterInput
+  lastName: StringOperationFilterInput
+  phoneNumber: PhoneNumberFilterInput
+  email: EmailAddressFilterInput
+}
+
+input CustomerDetailsInput {
+  firstName: String!
+  lastName: String!
+  email: String
+  phoneNumber: String
+}
+
+input CustomerDetailsSortInput {
+  fullName: SortEnumType
+  buyerId: SortEnumType
+  firstName: SortEnumType
+  lastName: SortEnumType
+  phoneNumber: PhoneNumberSortInput
+  email: EmailAddressSortInput
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input DecimalOperationFilterInput {
+  eq: Decimal
+  neq: Decimal
+  in: [Decimal]
+  nin: [Decimal]
+  gt: Decimal
+  ngt: Decimal
+  gte: Decimal
+  ngte: Decimal
+  lt: Decimal
+  nlt: Decimal
+  lte: Decimal
+  nlte: Decimal
+}
+
+input DeleteCategoryInput {
+  id: ID!
+}
+
+input DeleteExtraOptionCategoryInput {
+  id: ID!
+}
+
+input DeleteExtraOptionInput {
+  id: ID!
+}
+
+input DeleteProductInput {
+  id: ID!
+}
+
+input DeleteSiteInput {
+  id: ID!
+}
+
+input EmailAddressFilterInput {
+  and: [EmailAddressFilterInput!]
+  or: [EmailAddressFilterInput!]
+  email: StringOperationFilterInput
+}
+
+input EmailAddressSortInput {
+  email: SortEnumType
+}
+
+input ExtraOptionCategorySortInput {
+  name: SortEnumType
+  organisationId: SortEnumType
+  id: SortEnumType
+}
+
+input ExtraOptionSortInput {
+  name: SortEnumType
+  price: MoneySortInput
+  organisationId: SortEnumType
+  extraOptionCategoryId: SortEnumType
+  id: SortEnumType
+}
+
+input GetOrganisationByIdInput {
+  organisationId: ID!
+}
+
+input IdOperationFilterInput {
+  eq: ID
+  neq: ID
+  in: [ID]
+  nin: [ID]
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input InviteSellerInput {
+  email: String!
+  role: Role!
+}
+
+input ListFilterInputTypeOfAddressFilterInput {
+  all: AddressFilterInput
+  none: AddressFilterInput
+  some: AddressFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfOrderItemExtraOptionFilterInput {
+  all: OrderItemExtraOptionFilterInput
+  none: OrderItemExtraOptionFilterInput
+  some: OrderItemExtraOptionFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfOrderItemFilterInput {
+  all: OrderItemFilterInput
+  none: OrderItemFilterInput
+  some: OrderItemFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfProductCategoryLinkFilterInput {
+  all: ProductCategoryLinkFilterInput
+  none: ProductCategoryLinkFilterInput
+  some: ProductCategoryLinkFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfProductExtraOptionLinkFilterInput {
+  all: ProductExtraOptionLinkFilterInput
+  none: ProductExtraOptionLinkFilterInput
+  some: ProductExtraOptionLinkFilterInput
+  any: Boolean
+}
+
+input LongOperationFilterInput {
+  eq: Long
+  neq: Long
+  in: [Long]
+  nin: [Long]
+  gt: Long
+  ngt: Long
+  gte: Long
+  ngte: Long
+  lt: Long
+  nlt: Long
+  lte: Long
+  nlte: Long
+}
+
+input MoneyFilterInput {
+  and: [MoneyFilterInput!]
+  or: [MoneyFilterInput!]
+  amount: DecimalOperationFilterInput
+  currency: CurrencyOperationFilterInput
+}
+
+input MoneyInput {
+  amount: Decimal!
+  currency: Currency!
+}
+
+input MoneySortInput {
+  amount: SortEnumType
+  currency: SortEnumType
+}
+
+input OrderFilterInput {
+  and: [OrderFilterInput!]
+  or: [OrderFilterInput!]
+  organisationId: IdOperationFilterInput
+  orderDateTime: DateTimeOperationFilterInput
+  number: StringOperationFilterInput
+  siteId: LongOperationFilterInput
+  customerNotes: StringOperationFilterInput
+  stateDescription: OrderStateDescriptionFilterInput
+  items: ListFilterInputTypeOfOrderItemFilterInput
+  shippingAddress: AddressFilterInput
+  customerDetails: CustomerDetailsFilterInput
+  totalPrice: MoneyFilterInput
+  paymentState: PaymentStateFilterInput
+  isWaitingForPayment: BooleanOperationFilterInput
+  belongsToAnonymousUser: BooleanOperationFilterInput
+  id: LongOperationFilterInput
+}
+
+input OrderItemExtraOptionFilterInput {
+  and: [OrderItemExtraOptionFilterInput!]
+  or: [OrderItemExtraOptionFilterInput!]
+  name: StringOperationFilterInput
+  price: MoneyFilterInput
+  extraOptionId: LongOperationFilterInput
+}
+
+input OrderItemFilterInput {
+  and: [OrderItemFilterInput!]
+  or: [OrderItemFilterInput!]
+  productName: StringOperationFilterInput
+  productId: LongOperationFilterInput
+  productPrice: MoneyFilterInput
+  orderItemTotalPrice: MoneyFilterInput
+  quantity: DecimalOperationFilterInput
+  productDescription: StringOperationFilterInput
+  organisationId: LongOperationFilterInput
+  image: StringOperationFilterInput
+  orderId: LongOperationFilterInput
+  extraOptions: ListFilterInputTypeOfOrderItemExtraOptionFilterInput
+  id: LongOperationFilterInput
+}
+
+input OrderSortInput {
+  orderDateTime: SortEnumType
+  number: SortEnumType
+  siteId: SortEnumType
+  organisationId: SortEnumType
+  customerNotes: SortEnumType
+  stateDescription: OrderStateDescriptionSortInput
+  shippingAddress: AddressSortInput
+  customerDetails: CustomerDetailsSortInput
+  totalPrice: MoneySortInput
+  paymentState: PaymentStateSortInput
+  isWaitingForPayment: SortEnumType
+  belongsToAnonymousUser: SortEnumType
+  id: SortEnumType
+}
+
+input OrderStateDescriptionFilterInput {
+  and: [OrderStateDescriptionFilterInput!]
+  or: [OrderStateDescriptionFilterInput!]
+  orderState: OrderStateOperationFilterInput
+  stateChangeDescription: StringOperationFilterInput
+  isOpen: BooleanOperationFilterInput
+}
+
+input OrderStateDescriptionSortInput {
+  orderState: SortEnumType
+  stateChangeDescription: SortEnumType
+  isOpen: SortEnumType
+}
+
+input OrderStateOperationFilterInput {
+  eq: OrderState
+  neq: OrderState
+  in: [OrderState!]
+  nin: [OrderState!]
+}
+
+input OrganisationFilterInput {
+  and: [OrganisationFilterInput!]
+  or: [OrganisationFilterInput!]
+  name: StringOperationFilterInput
+  id: LongOperationFilterInput
+}
+
+input OrganisationSortInput {
+  name: SortEnumType
+  id: SortEnumType
+}
+
+input PaymentStateFilterInput {
+  and: [PaymentStateFilterInput!]
+  or: [PaymentStateFilterInput!]
+  type: PaymentTypeOperationFilterInput
+  status: PaymentStatusOperationFilterInput
+  paymentTransactionId: LongOperationFilterInput
+  canAcceptPayment: BooleanOperationFilterInput
+}
+
+input PaymentStateSortInput {
+  type: SortEnumType
+  status: SortEnumType
+  paymentTransactionId: SortEnumType
+  canAcceptPayment: SortEnumType
+}
+
+input PaymentStatusOperationFilterInput {
+  eq: PaymentStatus
+  neq: PaymentStatus
+  in: [PaymentStatus!]
+  nin: [PaymentStatus!]
+}
+
+input PaymentTypeOperationFilterInput {
+  eq: PaymentType
+  neq: PaymentType
+  in: [PaymentType!]
+  nin: [PaymentType!]
+}
+
+input PhoneNumberFilterInput {
+  and: [PhoneNumberFilterInput!]
+  or: [PhoneNumberFilterInput!]
+  phone: StringOperationFilterInput
+}
+
+input PhoneNumberSortInput {
+  phone: SortEnumType
+}
+
+input ProductCategoryLinkFilterInput {
+  and: [ProductCategoryLinkFilterInput!]
+  or: [ProductCategoryLinkFilterInput!]
+  productId: LongOperationFilterInput
+  categoryId: LongOperationFilterInput
+}
+
+input ProductExtraOptionLinkFilterInput {
+  and: [ProductExtraOptionLinkFilterInput!]
+  or: [ProductExtraOptionLinkFilterInput!]
+  productId: LongOperationFilterInput
+  extraOptionId: LongOperationFilterInput
+}
+
+input ProductFilterInput {
+  and: [ProductFilterInput!]
+  or: [ProductFilterInput!]
+  organisationId: IdOperationFilterInput
+  extraOptionLinks: ListFilterInputTypeOfProductExtraOptionLinkFilterInput
+  price: MoneyFilterInput
+  name: StringOperationFilterInput
+  siteId: LongOperationFilterInput
+  slug: StringOperationFilterInput
+  description: StringOperationFilterInput
+  image: StringOperationFilterInput
+  categoryLinks: ListFilterInputTypeOfProductCategoryLinkFilterInput
+  id: LongOperationFilterInput
+}
+
+input ProductSortInput {
+  organisationId: SortEnumType
+  price: MoneySortInput
+  name: SortEnumType
+  siteId: SortEnumType
+  slug: SortEnumType
+  description: SortEnumType
+  image: SortEnumType
+  id: SortEnumType
+}
+
+input RemoveSellerInput {
+  sellerId: ID!
+}
+
+input SiteFilterInput {
+  and: [SiteFilterInput!]
+  or: [SiteFilterInput!]
+  organisationId: IdOperationFilterInput
+  name: StringOperationFilterInput
+  slug: StringOperationFilterInput
+  onlyPredeffinedDeliveryOptions: BooleanOperationFilterInput
+  deliveryOptions: ListFilterInputTypeOfAddressFilterInput
+  id: LongOperationFilterInput
+}
+
+input SiteSortInput {
+  organisationId: SortEnumType
+  name: SortEnumType
+  slug: SortEnumType
+  onlyPredeffinedDeliveryOptions: SortEnumType
+  id: SortEnumType
+}
+
+input StartOrderProcessingInput {
+  orderId: ID!
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input UpdateCategoryInput {
+  id: ID!
+  name: String!
+  slug: String!
+  displayNumber: Int!
+  description: String
+}
+
+input UpdateExtraOptionCategoryInput {
+  id: ID!
+  name: String!
+}
+
+input UpdateExtraOptionInput {
+  id: ID!
+  name: String!
+  price: MoneyInput!
+  extraOptionCategoryId: ID!
+}
+
+input UpdateProductInput {
+  id: ID!
+  siteId: ID!
+  name: String!
+  price: Decimal!
+  currency: Currency!
+  description: String
+  slug: String!
+  image: String
+  categoryIds: [ID!]!
+  extraOptionIds: [ID!]!
+}
+
+input UpdateSiteInput {
+  id: ID!
+  name: String!
+  slug: String!
+}
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
+}
+
+enum Currency {
+  NONE
+  RON
+}
+
+enum InvitationResult {
+  JOINED
+  ALREADY_ACCEPTED
+}
+
+enum InvitationState {
+  PENDING
+  ACCEPTED
+  CANCELED
+  EXPIRED
+}
+
+enum OrderState {
+  DRAFT
+  AWAITING_PAYMENT
+  PROCESSING
+  DELIVERING
+  COMPLETED
+  CANCELED
+}
+
+enum PaymentStatus {
+  NOT_PAID
+  AWAITING_PAYMENT_COMPLETION
+  PAID
+}
+
+enum PaymentType {
+  CASH
+  CARD
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  SELLER
+}
+
+enum SellerState {
+  ACTIVE
+  INVITATION_PENDING
+  DISABLED
+}
+
+enum SortEnumType {
+  ASC
+  DESC
+}
+
+directive @authorize("The name of the authorization policy that determines access to the annotated resource." policy: String "Roles that are allowed to access the annotated resource." roles: [String!] "Defines when when the authorize directive shall be applied.By default the authorize directives are applied during the validation phase." apply: ApplyPolicy! = BEFORE_RESOLVER) repeatable on OBJECT | FIELD_DEFINITION
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+"The `Long` scalar type represents non-fractional signed whole 64-bit numeric values. Long can represent values between -(2^63) and 2^63 - 1."
+scalar Long
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

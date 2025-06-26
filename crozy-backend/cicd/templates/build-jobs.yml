@@ -1,0 +1,50 @@
+parameters:
+  - name: vmImageName
+  - name: useSelfHosted
+    type: boolean  
+    
+jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      ${{ if eq(parameters.useSelfHosted, true) }}:
+        name: Default # Name of a pool.
+      ${{ else }}:
+        vmImage: ${{ parameters.vmImageName }}
+
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        version: 8.x
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build'
+      inputs:
+        command: 'build'
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Test'
+      inputs:
+        command: 'test'
+        arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
+        publishTestResults: true
+        projects: '**/*Tests.csproj' # update with your test project directory
+
+    - task: PublishCodeCoverageResults@2
+      displayName: 'Publish code coverage report'
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/Crozy.GraphQLApi/bin/$(buildConfiguration)/net8.0/'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        replaceExistingArchive: true
+
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      artifact: drop
