@@ -1,0 +1,18 @@
+{
+  "Header": [
+    {
+      "id": "name",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Name",
+      "sortable": true
+    },
+    {
+      "id": "slug",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Slug",
+      "sortable": true
+    }
+  ]
+}

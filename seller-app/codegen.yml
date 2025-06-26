@@ -1,0 +1,39 @@
+overwrite: true
+watch: true
+#schema: "https://fa-crozy-graphql-dev.azurewebsites.net/api/GraphQL?sdl"
+schema: "http://127.0.0.1:7071/api/GraphQL?sdl"
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "fragment-matcher"
+      #- add: '// THIS FILE IS GENERATED, DO NOT EDIT!'
+    config:
+      reactApolloVersion: 3
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
+      - schema-ast
+  # src/generated/page.tsx:
+  #   config:
+  #     documentMode: external
+  #     importDocumentNodeExternallyFrom: ./graphql
+  #     reactApolloVersion: 3
+  #     withHooks: true
+  #     contextType: 'ApolloClientContext'
+  #     contextTypeRequired: true
+  #     # withHOC: false
+  #     # excludePatterns: 'getComments'
+  #     # excludePatternsOptions: 'i'
+  #     # customDataIdFromObjectName: 'test'
+  #     # customDataIdFromObjectImport: 'abc'
+  #     apolloClientInstanceImport: '../components/atoms'
+  #     # apolloStateKey: '__APOLLO_STATE__'
+  #   preset: import-types
+  #   presetConfig:
+  #     typesPath: ./graphql
+    # plugins:
+    #   - "graphql-codegen-apollo-next-ssr" # replace by - graphql-codegen-apollo-next-ssr

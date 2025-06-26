@@ -1,0 +1,49 @@
+# Node.js React Web App to Linux on Azure
+# Build a Node.js React app and deploy it to Azure as a Linux web app.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger: none
+
+parameters:
+- name: useSelfHosted
+  displayName: Use Self-Hosted Agents
+  type: boolean
+  default: false
+
+variables:
+- template: templates/variables.yml  # Template reference
+- name: Build.SourceVersion.PreparedForSplit
+  value: ${{ replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(variables['Build.SourceVersion'], 'a', 'a_'), 'b', 'b_'), 'c', 'c_'), 'd', 'd_'), 'e', 'e_'), 'f', 'f_'), 'g', 'g_'), 'h', 'h_'), 'i', 'i_'), 'j', 'j_'), 'k', 'k_'), 'l', 'l_'), 'm', 'm_'), 'n', 'n_'), 'o', 'o_'), 'p', 'p_'), 'q', 'q_'), 'r', 'r_'), 's', 's_'), 't', 't_'), 'u', 'u_'), 'v', 'v_'), 'w', 'w_'), 'x', 'x_'), 'y', 'y_'), 'z', 'z_'), '0', '0_'), '1', '1_'), '2', '2_'), '3', '3_'), '4', '4_'), '5', '5_'), '6', '6_'), '7', '7_'), '8', '8_'), '9', '9_') }}
+  readonly: true
+- name: Build.SourceVersion.Short
+  value: ${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[0] }}${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[1] }}${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[2] }}${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[3] }}${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[4] }}${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[5] }}${{ split(variables['Build.SourceVersion.PreparedForSplit'], '_')[6] }}
+  readonly: true
+- name: ImageVersionTag
+  value: pr-$(Build.SourceVersion.Short)
+
+stages:
+- stage: Build
+  displayName: Build & publish
+  jobs:
+  - template: templates/build-jobs.yml  # Template reference
+    parameters:
+      useSelfHosted: ${{ parameters.useSelfHosted }}
+      vmImageName: $(vmImageName)
+      containerRegistryServiceConnection: $(dockerConnectionServiceNameProd)
+      imageRepository: 'crozy-seller-app'
+      imageTags: |
+        $(ImageVersionTag)
+        pr
+
+- template: templates/deploy-template.yml
+  parameters:
+    stageName: Deploy_PR
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    displayName: 'Deploy on PR'
+    vmImageName: $(vmImageName)
+    dependsOnStage: Build
+    acrName: $(acrName)
+    connectedServiceNameARM: $(connectedServiceNameNonPROD)
+    environment: 'pr'
+    imageTag: $(ImageVersionTag)

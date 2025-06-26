@@ -1,0 +1,518 @@
+fragment CoreSiteFields on Site {
+  id
+  name
+  slug
+}
+
+query GetSites($organisationId: ID) {
+  sites(where: { organisationId: { eq: $organisationId } }) {
+    nodes {
+      ...CoreSiteFields
+    }
+  }
+}
+
+query GetSiteById($id: ID!) {
+  siteById(id: $id) {
+    ...CoreSiteFields
+  }
+}
+
+fragment CoreProductFields on Product {
+  id
+  siteId
+  price {
+    amount
+    currency
+  }
+  name
+  slug
+  description
+  image {
+    url
+    name
+  }
+}
+
+query GetProducts {
+  products {
+    nodes {
+      ...CoreProductFields
+    }
+  }
+}
+
+fragment DetailedProductFields on Product {
+  ...CoreProductFields
+  categories {
+    id
+    name
+  }
+  site: siteSummary {
+    id
+    name
+  }
+  extraOptions {
+    id
+    name
+    extraOptionCategoryId
+    category {
+      id
+      name
+    }
+    price {
+      amount
+      currency
+    }
+  }
+}
+
+query GetProductById($id: ID!) {
+  productById(id: $id) {
+    ...DetailedProductFields
+  }
+}
+
+fragment CoreCategoryFields on Category {
+  id
+  name
+  slug
+  description
+  displayNumber
+}
+
+fragment DetailedCategoryFields on Category {
+  id
+  name
+  slug
+  description
+  products {
+    nodes {
+      ...DetailedProductFields
+    }
+  }
+}
+
+query GetCategories($organisationId: ID) {
+  categories(where: { organisationId: { eq: $organisationId } }) {
+    nodes {
+      ...CoreCategoryFields
+    }
+  }
+}
+
+query GetCategoryById($id: ID!) {
+  categoryById(id: $id) {
+    id
+    name
+    slug
+    description
+    displayNumber
+  }
+}
+
+query GetExtraOptionsCategories {
+  allExtraOptionsCategoriesForCurrentOrganisation {
+    totalCount
+    nodes {
+      id
+      name
+      extraOptions {
+        totalCount
+      }
+    }
+  }
+}
+
+query GetAllExtraOptionCategoriesPagination(
+  $first: Int
+  $after: String
+  $last: Int
+  $before: String
+) {
+  allExtraOptionsCategoriesForCurrentOrganisation(
+    first: $first
+    after: $after
+    last: $last
+    before: $before
+  ) {
+    nodes {
+      id
+      name
+      extraOptions {
+        totalCount
+      }
+    }
+    pageInfo {
+      ...PageInfoFields
+    }
+    totalCount
+  }
+}
+
+query GetExtraOptionsCategoriesName {
+  allExtraOptionsCategoriesForCurrentOrganisation {
+    nodes {
+      id
+      name
+    }
+  }
+}
+
+query GetExtraOptionCategoryById($id: ID!) {
+  extraOptionCategoryById(id: $id) {
+    extraOptionCategory{
+      id
+      name
+    }
+  }
+}
+
+query GetExtraOptionCategoryWithExtraOptionsById($id: ID!) {
+  extraOptionCategoryById(id: $id) {
+    extraOptionCategory{
+      id
+      name
+      extraOptions {
+        totalCount
+        nodes {
+          id
+          name
+          extraOptionCategoryId
+          price {
+            amount
+            currency
+          }
+        }
+      }
+    }
+  }
+}
+
+query GetExtraOptions {
+  extraOptionsForCurrentOrganisation {
+    totalCount
+    nodes {
+      id
+      name
+      extraOptionCategoryId
+      category {
+        name
+        id
+      }
+      price {
+        amount
+        currency
+      }
+    }
+  }
+}
+
+query GetAllExtraOptionsPagination(
+  $first: Int
+  $after: String
+  $last: Int
+  $before: String
+) {
+  extraOptionsForCurrentOrganisation(
+    first: $first
+    after: $after
+    last: $last
+    before: $before
+  ) {
+    nodes {
+      id
+      name
+      extraOptionCategoryId
+      category {
+        name
+        id
+      }
+      price {
+        amount
+        currency
+      }
+    }
+    pageInfo {
+      ...PageInfoFields
+    }
+    totalCount
+  }
+}
+
+query GetExtraOptionById($id: ID!) {
+  extraOptionById(id: $id) {
+    extraOption {
+      id
+      name
+      extraOptionCategoryId
+      price {
+        amount
+        currency
+      }
+    }
+  }
+}
+
+query getCategoryWithProductsById($id: ID!) {
+  categoryById(id: $id) {
+    ...DetailedCategoryFields
+  }
+}
+
+query GetCreateProductDetails($organisationId: ID) {
+  categories(where: { organisationId: { eq: $organisationId } }) {
+    nodes {
+      id
+      name
+    }
+  }
+  sites(where: { organisationId: { eq: $organisationId } }) {
+    nodes {
+      id
+      name
+    }
+  }
+  allExtraOptionsForCurrentOrganisation {
+    id
+    name
+    category {
+      id
+      name
+    }
+    price {
+      amount
+      currency
+    }
+  }
+}
+
+fragment CoreOrderFields on Order {
+  id
+  number
+  stateDescription {
+    isOpen
+    orderState
+    stateChangeDescription
+  }
+  totalPrice {
+    amount
+    currency
+  }
+}
+
+fragment OrderItemsDetails on Order {
+  items {
+    nodes {
+      id
+      productName
+      productPrice {
+        amount
+        currency
+      }
+      extraOptions {
+        name
+        price {
+          amount
+          currency
+        }
+      }
+      orderItemTotalPrice {
+        amount
+        currency
+      }
+      quantity
+      productDescription
+    }
+  }
+}
+
+fragment ShippingAddress on Order {
+  shippingAddress {
+    country
+    region
+    city
+    line1
+    line2
+    displayName
+  }
+}
+
+fragment CustomerDetails on Order {
+  customerDetails {
+    phoneNumber
+    email
+    fullName
+  }
+}
+
+fragment OrderDetails on Order {
+  ...CoreOrderFields
+  ...OrderItemsDetails
+  ...ShippingAddress
+  ...CustomerDetails
+}
+
+query GetOrders {
+  orders {
+    nodes {
+      ...CoreOrderFields
+    }
+  }
+}
+
+query GetOrderById($id: ID!) {
+  orderById(id: $id) {
+    order {
+      ...OrderDetails
+    }
+  }
+}
+
+query OrdersSummary {
+  ordersSummary {
+    newOrders
+    processingOrders
+  }
+}
+
+fragment PageInfoFields on PageInfo {
+  hasNextPage
+  hasPreviousPage
+  startCursor
+  endCursor
+}
+
+query GetAllProducts(
+  $first: Int
+  $after: String
+  $last: Int
+  $before: String
+  $organisationId: ID
+) {
+  products(
+    first: $first
+    after: $after
+    last: $last
+    before: $before
+    where: { organisationId: { eq: $organisationId } }
+  ) {
+    nodes {
+      ...DetailedProductFields
+    }
+    pageInfo {
+      ...PageInfoFields
+    }
+    totalCount
+  }
+}
+
+query GetAllOrdersPagination(
+  $first: Int
+  $after: String
+  $last: Int
+  $before: String
+  $organisationId: ID
+) {
+  orders(
+    first: $first
+    after: $after
+    last: $last
+    before: $before
+    order: { stateDescription: { orderState: ASC }, number: ASC }
+    where: { organisationId: { eq: $organisationId } }
+  ) {
+    nodes {
+      ...CoreOrderFields
+      ...CustomerDetails
+      ...ShippingAddress
+    }
+    pageInfo {
+      ...PageInfoFields
+    }
+    totalCount
+  }
+}
+
+fragment UserFragment on User {
+  id
+  externalId
+  email
+  lastName
+  firstName
+  sellers {
+    id
+    userId
+    organisationId
+    organisation {
+      id
+      name
+    }
+    role
+  }
+  buyer {
+    id
+    userId
+  }
+}
+
+query GetUserByExternalId($externalId: String!) {
+  userByExternalId(externalId: $externalId) {
+    user {
+      ...UserFragment
+    }
+    errors {
+      message
+      code
+    }
+  }
+}
+
+query GetOrganisationWithSellersById($organisationId: ID!) {
+  organisationById(input: { organisationId: $organisationId }) {
+    organisation {
+      id
+      name
+      sellers {
+        id
+        organisationId
+        role
+        sellerState
+        invitation {
+          email
+          invitationCode
+          invitationState
+          invitationDate
+        }
+        user {
+          id
+          firstName
+          lastName
+          email
+          externalId
+        }
+      }
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+query GetMySeller {
+  mySeller {
+    seller {
+      id
+      role
+      userId
+      user {
+        ...UserFragment
+      }
+      organisation {
+        id
+        name
+      }
+    }
+  }
+}

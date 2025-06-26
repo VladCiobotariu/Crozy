@@ -1,0 +1,45 @@
+parameters:
+  - name: vmImageName
+  - name: displayName
+  - name: stageName
+  - name: dependsOnStage
+  - name: environment
+  - name: connectedServiceNameARM
+  - name: acrName
+  - name: imageTag
+  - name: useSelfHosted
+    type: boolean
+
+stages:
+- stage: ${{ parameters.stageName }}
+  displayName: ${{ parameters.displayName }}
+  dependsOn: ${{ parameters.dependsOnStage }}
+  
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy
+    environment: ${{ parameters.environment }}
+    variables:
+      - group: 'crozy-seller-app-${{ parameters.environment }}'
+    pool:
+      ${{ if eq(parameters.useSelfHosted, true) }}:
+        name: Default # Name of a pool.
+        demands:
+          - docker
+          - Agent.OSArchitecture -equals X64
+      ${{ else }}:
+        vmImage: ${{ parameters.vmImageName }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self 
+          - task: AzureContainerApps@1
+            inputs:
+              azureSubscription: ${{ parameters.connectedServiceNameARM }}
+              acrName: ${{ parameters.acrName }}
+              containerAppName: 'ca-crozy-seller-app-${{ parameters.environment }}'
+              resourceGroup: 'rg-crozy-${{ parameters.environment }}'
+              imageToDeploy: '${{ parameters.acrName }}.azurecr.io/crozy-seller-app:${{ parameters.imageTag }}'
+              acrUsername: $(ACR_USERNAME_SECRET)
+              acrPassword: $(ACR_PASSWORD_SECRET)

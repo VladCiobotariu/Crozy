@@ -1,0 +1,295 @@
+mutation AddSite($name: String!, $slug: String!) {
+  addSite(input: { name: $name, slug: $slug }) {
+    site {
+      name
+      id
+      slug
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation UpdateSite($input: UpdateSiteInput!) {
+  updateSite(input: $input) {
+    site {
+      id
+      name
+      slug
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation DeleteSite($input: DeleteSiteInput!) {
+  deleteSite(input: $input) {
+    deleted
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation AddProduct($input: AddProductInput!) {
+  addProduct(input: $input) {
+    product {
+      id
+      name
+      price {
+        amount
+        currency
+      }
+      slug
+      description
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation UpdateProduct($input: UpdateProductInput!) {
+  updateProduct(
+    input: $input
+  ) {
+    product {
+      id
+      siteId
+      image {
+        name
+        url
+      }
+      price {
+        amount
+        currency
+      }
+      name
+      slug
+      description
+      categories {
+        name
+      }
+      
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation DeleteProduct($input: DeleteProductInput!) {
+  deleteProduct(input: $input) {
+    deleted
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation AddCategory($input: AddCategoryInput!) {
+  addCategory(input: $input) {
+    category {
+      id
+      name
+      slug
+      description
+      displayNumber
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation UpdateCategory($input: UpdateCategoryInput!) {
+  updateCategory(input: $input) {
+    category {
+      id
+      name
+      slug
+      description
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation DeleteCategory($input: DeleteCategoryInput!) {
+  deleteCategory(input: $input) {
+    deleted
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation AddExtraOptionCategory($input: AddExtraOptionCategoryInput!) {
+  addExtraOptionCategory(input: $input) {
+    errors {
+      code
+      message
+    }
+    extraOptionCategory {
+      id
+      name
+    }
+  }
+}
+
+mutation UpdateExtraOptionCategory($input: UpdateExtraOptionCategoryInput!) {
+  updateExtraOptionCategory(input: $input) {
+    errors {
+      code
+      message
+    }
+    extraOptionCategory {
+      id
+      name
+    }
+  }
+}
+
+mutation DeleteExtraOptionCategory($input: DeleteExtraOptionCategoryInput!) {
+  deleteExtraOptionCategory(input: $input) {
+    deleted
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation AddExtraOption($input: AddExtraOptionInput!) {
+  addExtraOption(input: $input) {
+    errors {
+      code
+      message
+    }
+    extraOption {
+      id
+      name
+      extraOptionCategoryId
+      price {
+        amount
+        currency
+      }
+    }
+  }
+}
+
+mutation UpdateExtraOption($input: UpdateExtraOptionInput!) {
+  updateExtraOption(input: $input) {
+    errors {
+      code
+      message
+    }
+    extraOption {
+      id
+      name
+      extraOptionCategoryId
+      price {
+        amount
+        currency
+      }
+    }
+  }
+}
+
+mutation DeleteExtraOption($input: DeleteExtraOptionInput!) {
+  deleteExtraOption(input: $input) {
+    deleted
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation AddImage($file: Upload!) {
+  addImage(input: { file: $file }) {
+    image {
+      name
+      url
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation StartOrderProcessing($orderId: ID!) {
+  startOrderProcessing(input: { orderId: $orderId }) {
+    order {
+      stateDescription {
+        orderState
+        stateChangeDescription
+      }
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation CompleteOrder($orderId: ID!) {
+  completeOrder(input: { orderId: $orderId }) {
+    order {
+      stateDescription {
+        orderState
+        stateChangeDescription
+      }
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation CancelOrder($orderId: ID!, $reason: String!) {
+  cancelOrder(input: { orderId: $orderId, reason: $reason }) {
+    order {
+      stateDescription {
+        orderState
+        stateChangeDescription
+      }
+    }
+    errors {
+      code
+      message
+    }
+  }
+}
+
+mutation InviteSeller($email: String!, $role: Role!) {
+  inviteSeller(input: { email: $email, role: $role }) {
+    seller {
+      id
+    }
+  }
+}
+
+mutation RemoveSeller($sellerId: ID!) {
+  removeSeller(input: { sellerId: $sellerId }) {
+    deleted
+    errors {
+      code
+      message
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "Header": [
+    {
+      "id": "name",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Name",
+      "sortable": true
+    },
+    {
+      "id": "extraOptions.totalCount",
+      "numeric": true,
+      "disablePadding": false,
+      "label": "Extra Options No.",
+      "sortable": false
+    }
+  ]
+}

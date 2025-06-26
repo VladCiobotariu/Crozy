@@ -1,0 +1,46 @@
+{
+  "Header": [
+    {
+      "id": "number",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Number",
+      "sortable": true
+    },
+    {
+      "id": "state",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "State",
+      "sortable": true
+    },
+    {
+      "id": "price",
+      "numeric": true,
+      "disablePadding": false,
+      "label": "Price",
+      "sortable": true
+    },
+    {
+      "id": "customerName",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Customer Name",
+      "sortable": true
+    },
+    {
+      "id": "customerEmail",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Customer Email",
+      "sortable": false
+    },
+    {
+      "id": "customerPhone",
+      "numeric": false,
+      "disablePadding": false,
+      "label": "Customer Phone",
+      "sortable": false
+    }
+  ]
+}

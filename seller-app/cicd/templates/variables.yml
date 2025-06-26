@@ -1,0 +1,12 @@
+variables:
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+  # Azure Resource Manager connection created during pipeline creation
+  connectedServiceNameNonPROD: 'Crozy Subscription Non-PROD'
+
+  # Container Registry to push images
+  acrName: 'acrcrozygwcprod'
+
+  dockerConnectionServiceNameProd: 'dockerAcrServiceConnectionPROD'
