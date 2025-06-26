@@ -1,0 +1,9 @@
+{
+    "mimeTypes": {
+        ".json": "text/json"
+    },
+    "globalHeaders": {
+        "Access-Control-Allow-Origin": "https://crozy.b2clogin.com",
+        "Access-Control-Allow-Methods": "GET, OPTIONS"
+    }
+}

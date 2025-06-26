@@ -1,0 +1,681 @@
+a {
+  color: #23242b;
+}
+
+a:hover {
+  color: #337ab7;
+}
+
+.panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid rgb(225, 225, 229);
+  border-radius: 20px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel,
+.panel_layout,
+.panel_layout_row,
+body,
+html {
+  height: 100%;
+}
+
+html {
+  background: 0 0;
+}
+body {
+  font-family:
+    Segoe UI,
+    SegoeUI,
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+  background-attachment: fixed;
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: left;
+  font: -apple-system-body;
+}
+p {
+  margin: 0;
+}
+a:focus {
+  outline: 0;
+}
+input,
+select {
+  border: 2px solid rgb(225, 225, 229);
+}
+input::placeholder {
+  color: #6a6a6a;
+  opacity: 1;
+}
+.container {
+  text-align: center;
+  width: 100%;
+  display: table;
+  height: 100vh;
+}
+.heading h1 {
+  margin-bottom: 20px;
+}
+.col-lg-6 {
+  max-width: 470px;
+  width: 100%;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+}
+.row {
+  display: table-cell;
+  vertical-align: middle;
+}
+ul {
+  padding: 0;
+}
+#AmazonExchange:hover {
+  background-color: #36474f !important;
+}
+#FacebookExchange:hover {
+  background-color: #3b5595 !important;
+}
+#GitHubExchange:hover {
+  background-color: #0f0f0f !important;
+}
+#AppleExchange:hover,
+#AppleManagedExchange:hover {
+  background-color: #0f0f0f !important;
+}
+#GoogleExchange:hover {
+  background-color: #c64a29 !important;
+}
+#LinkedInExchange:hover {
+  background-color: #0274b3 !important;
+}
+#MicrosoftAccountExchange:hover {
+  background-color: #01a4ef !important;
+}
+#TwitterExchange:hover {
+  background-color: #1da1f2 !important;
+}
+.buttons button {
+  margin: 0 auto;
+  width: 60%;
+  height: 50px;
+  background-color: rgb(109, 99, 253);
+  border-radius: 0.5rem;
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  margin-top: 20px;
+}
+.buttons button:hover {
+  background-color: #1662c7;
+  border-color: #204d74;
+}
+.buttons button[aria-disabled="true"] {
+  opacity: 0.3;
+}
+.buttons button:not([aria-disabled="true"]) {
+  opacity: 1;
+}
+label {
+  font-weight: 600;
+}
+#api .working {
+  background: url(data:image/gif;base64,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)
+    no-repeat;
+  height: 30px;
+  width: auto;
+  background-position: center bottom;
+}
+
+@media screen and (max-width: 100%) {
+  .row .panel-default .panel-body {
+    margin-top: 40px;
+  }
+  .row .panel-default .panel-body .branding img {
+    display: block;
+    height: 80px;
+    width: auto;
+    margin: 0 auto;
+  }
+  .row .panel-default .panel-body .branding h1 {
+    display: none;
+  }
+  .row .panel-default .panel-body h3 {
+    font-size: 1.5em;
+    margin-top: 15px;
+  }
+}
+.panel,
+.panel_layout,
+.panel_layout_row,
+body,
+html {
+  height: 100%;
+}
+@media only screen and (max-width: 600px) {
+  img[data-tenant-branding-background="true"] {
+    display: none;
+  }
+  .container {
+    background-color: #fff;
+  }
+  .container .row .panel-default {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.unified_container .row .panel-default {
+  padding: 40px 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100%;
+  background-color: #fff;
+}
+.unified_container .row .panel-default .panel-body {
+  max-width: 380px;
+  width: auto;
+  margin: 0 auto;
+  padding: 0;
+}
+.unified_container .row .panel-default .panel-body .companyName {
+  font-size: 1.5em;
+  margin-bottom: 45px;
+}
+.unified_container .row .panel-default .panel-body .companyLogo {
+  height: 32px;
+  width: auto;
+  margin-bottom: 32px;
+  margin-top: 16px;
+  display: block;
+}
+.unified_container .row .panel-default .panel-body img {
+  max-width: 100%;
+  width: auto;
+  height: 70px;
+  margin: 0 auto;
+  display: block;
+}
+.unified_container .row .panel-default .panel-body h3 {
+  font-size: 1.5em;
+  display: none;
+}
+.unified_container .row .panel-default #api {
+  position: relative;
+  display: table;
+  margin: 0;
+  width: 100%;
+}
+.unified_container .row .panel-default #api .intro {
+  color: rgb(56, 57, 64);
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+.unified_container .row .panel-default #api .claims-provider-list-buttons .intro {
+  color: rgb(56, 57, 64);
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.unified_container .row .panel-default #api .claims-provider-list-buttons .intro:before {
+  margin-right: 10px;
+}
+.unified_container .row .panel-default #api .claims-provider-list-buttons .intro:after {
+  margin-left: 10px;
+}
+.unified_container .row .panel-default #api .claims-provider-list-buttons .intro:after,
+.unified_container .row .panel-default #api .claims-provider-list-buttons .intro:before {
+  border-bottom: 2px solid rgb(225, 225, 229);
+  content: "";
+  flex: 1 1;
+  margin-bottom: 30px;
+}
+
+.unified_container .row .panel-default #api .claims-provider-list-buttons .intro h2 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.unified_container .row .panel-default #api .localAccount .intro {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.unified_container .row .panel-default #api .intro h2 {
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.unified_container .row .panel-default #api .divider {
+  display: none;
+}
+.unified_container .row .panel-default #api .localAccount {
+  top: 10px;
+  width: 100%;
+}
+.unified_container .row .panel-default #api .localAccount .intro h2 {
+  font-size: 20px;
+}
+.unified_container .row .panel-default #api .localAccount .error {
+  color: #b00;
+  text-align: left;
+}
+.unified_container .row .panel-default #api .localAccount .entry .buttons {
+  margin: 0 0 16px 0;
+  text-align: left;
+}
+.unified_container .row .panel-default #api .localAccount .entry .buttons button {
+  background-image: none;
+  background-color: rgb(109, 99, 253);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 400;
+  height: inherit;
+  line-height: 1.3333333;
+  margin-right: 0;
+  margin-left: 0;
+  padding: 10px 16px;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: inherit;
+  -moz-user-select: none;
+  -ms-touch-action: manipulation;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  color: #fff;
+  width: 100%;
+  box-shadow: 0 0 30px 0 #dae1f7;
+}
+@media screen and (-ms-high-contrast: active) {
+  .unified_container .row .panel-default #api .accountButton,
+  .unified_container .row .panel-default #api .localAccount .entry .buttons button {
+    border: 1px dashed #fff;
+  }
+  .unified_container .row .panel-default #api .accountButton:hover,
+  .unified_container .row .panel-default #api .localAccount .entry .buttons button:hover {
+    border: 1px solid #fff;
+  }
+}
+.unified_container .row .panel-default #api .localAccount .entry .buttons button:focus,
+.unified_container .row .panel-default #api .localAccount .entry .buttons button:hover {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #574fca;
+  color: #fff;
+}
+.unified_container .row .panel-default #api .localAccount .entry .entry-item {
+  position: relative;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  display: block;
+}
+.unified_container .row .panel-default #api .localAccount .entry .entry-item label {
+  display: none;
+}
+.unified_container .row .panel-default #api .localAccount .entry .entry-item input:focus {
+  border: 2px solid #000;
+}
+.unified_container .row .panel-default #api .localAccount .entry .entry-item input {
+  outline: 0;
+  background-color: #fff !important;
+  background-image: none !important;
+  border-radius: 0.5rem !important;
+  color: #555;
+  display: inline-block;
+  font-size: 1em;
+  height: 40px;
+  line-height: 1.42857143;
+  padding: 6px 20px;
+  transition:
+    border-color ease-in-out 0.15s,
+    box-shadow ease-in-out 0.15s !important;
+  width: -webkit-fill-available;
+  -o-transition:
+    border-color ease-in-out 0.15s,
+    box-shadow ease-in-out 0.15s !important;
+  -webkit-transition:
+    border-color ease-in-out 0.15s,
+    -webkit-box-shadow ease-in-out 0.15s !important;
+}
+.unified_container .row .panel-default #api .localAccount .entry .entry-item #password {
+  margin-bottom: 20px;
+}
+.unified_container .row .panel-default #api .localAccount .entry .entry-item .password-label {
+  text-align: left;
+  height: 0;
+  left: 0;
+  width: 100%;
+}
+.forgot-password {
+  text-align: left;
+}
+.forgot-password.center-height {
+  position: absolute;
+  bottom: 0;
+  clear: right;
+  cursor: pointer;
+  text-align: right;
+}
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.unified_container
+  .row
+  .panel-default
+  #api
+  .localAccount
+  .entry
+  .entry-item
+  .password-label
+  #forgotPassword {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  clear: right;
+  cursor: pointer;
+  text-align: right;
+}
+.unified_container .row .panel-default #api .localAccount .rememberMe {
+  margin-top: -2rem;
+  text-align: right;
+  margin-left: 59%;
+  position: relative;
+  width: 15rem;
+}
+.unified_container .row .panel-default #api .localAccount .rememberMe.align-to-left {
+  margin-top: 0.5rem;
+  text-align: left;
+  margin-left: 0;
+  width: 100%;
+}
+.working {
+  display: none;
+}
+
+.unified_container .row .panel-default #api .localAccount .create {
+  margin-top: 12rem;
+}
+
+.unified_container .row .panel-default #api .claims-provider-list-text-links p {
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.unified_container .row .panel-default #api .localAccount .create p {
+  text-align: left;
+}
+
+.unified_container .row .panel-default #api .localAccount .create #createAccount {
+  border-radius: 0.5rem;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 400;
+  height: inherit;
+  line-height: 1.3333333;
+  padding: 10px 16px;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  white-space: nowrap;
+  -moz-user-select: none;
+  -ms-touch-action: manipulation;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  width: auto;
+  margin-top: -3rem;
+  cursor: pointer;
+  animation: 0.5s ease-out 0s 1 slideInFromRight;
+  color: rgb(109, 99, 253);
+}
+
+.unified_container .row .panel-default #api .localAccount .create #createAccount:hover {
+  color: #0056b3;
+}
+
+.unified_container .row .panel-default #api .social {
+  position: absolute;
+  bottom: 80px;
+  width: 100%;
+}
+
+.unified_container .row .panel-default #api .social .options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.unified_container .row .panel-default #api .accountButton {
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+  display: block;
+  font-size: 0px;
+  height: 45px;
+  width: 64px;
+  overflow: hidden;
+  border: 0px solid rgb(205, 215, 225);
+  background-color: #f7f8fb;
+  -moz-border-radius: 2rem;
+  -webkit-border-radius: 2rem;
+  border-radius: 2rem;
+  color: transparent;
+}
+
+.unified_container .row .panel-default .panel-body #api .social .options #GoogleExchange {
+  background-size: 30% auto;
+}
+
+.unified_container .row .panel-default .panel-body #api .social .options #FacebookExchange {
+  background-size: 20% auto;
+}
+
+.unified_container .row .panel-default #api .accountButton:hover {
+  color: #fff;
+  background-color: #1662c7;
+}
+.claims-provider-list-text-links-bottom-under-form {
+  text-align: left;
+}
+@media (max-width: 100%) {
+  .unified_container .row .panel-default {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 550px;
+  }
+  .unified_container .row .panel-default .panel-body {
+    padding: 5rem 3rem;
+    margin-top: 20px;
+  }
+  .unified_container .row .panel-default .panel-body .companyName {
+    display: none;
+  }
+  .unified_container .row .panel-default .panel-body h3 {
+    display: block;
+  }
+  .unified_container .row .panel-default .panel-body #api {
+    width: auto;
+  }
+  .unified_container .row .panel-default .panel-body #api .social {
+    top: 370px;
+    width: auto;
+  }
+  .unified_container .row .panel-default .panel-body #api .social .options .accountButton {
+    height: 40px;
+  }
+  .unified_container .row .panel-default .panel-body #api .social .options #FacebookExchange {
+    background-size: 12px;
+    background-position: 50% 75%;
+    margin-bottom: 10px;
+  }
+  .unified_container .row .panel-default .panel-body #api .social .options #GoogleExchange {
+    background-size: 20px;
+    background-position: 50% 75%;
+    margin-bottom: 10px;
+  }
+  .unified_container .row .panel-default .panel-body #api .social .options #TwitterExchange {
+    background-size: 20px;
+    background-position-x: 56px;
+    background-position-y: 14px;
+    margin-bottom: 10px;
+  }
+  .unified_container .row .panel-default .panel-body #api .localAccount {
+    top: 20px;
+  }
+  .unified_container .row .panel-default .panel-body #api .localAccount .entry .entry-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .unified_container
+    .row
+    .panel-default
+    .panel-body
+    #api
+    .localAccount
+    .entry
+    .entry-item
+    .password-label {
+    top: 145px;
+  }
+  .unified_container
+    .row
+    .panel-default
+    .panel-body
+    #api
+    .localAccount
+    .entry
+    .entry-item
+    #logonIdentifier {
+    height: 40px;
+  }
+  .unified_container
+    .row
+    .panel-default
+    .panel-body
+    #api
+    .localAccount
+    .entry
+    .entry-item
+    #password {
+    height: 40px;
+  }
+  .unified_container
+    .row
+    .panel-default
+    .panel-body
+    #api
+    .localAccount
+    .entry
+    .entry-item:nth-child(2) {
+    width: auto;
+    float: left;
+  }
+  .unified_container .row .panel-default .panel-body #api .localAccount .entry .buttons #next {
+    width: auto;
+    text-indent: -4px;
+    height: 40px;
+    line-height: 0;
+    position: relative;
+    bottom: 5px;
+    left: 8px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .unified_container .row .panel-default #api .localAccount .rememberMe {
+    margin-top: 1.75rem;
+    text-align: left;
+    margin-left: 0;
+    width: 100%;
+  }
+  .forgot-password.center-height {
+    top: 0;
+    right: 12rem;
+    position: relative;
+  }
+}
+
+#AmazonExchange {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/amazon.svg);
+}
+#AmazonExchange:hover {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/amazon.svg);
+}
+#FacebookExchange {
+  background-image: url(https://crozy.b2clogin.com/static/tenant/templates/idp_logos/colored/facebook.svg);
+}
+#FacebookExchange:hover {
+  background-image: url(https://crozy.b2clogin.com/static/tenant/templates/idp_logos/white/facebook.svg);
+}
+#GitHubExchange {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/github.svg);
+}
+#GitHubExchange:hover {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/github.svg);
+}
+#AppleExchange,
+#AppleManagedExchange {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/apple.svg);
+}
+#AppleExchange:hover,
+#AppleManagedExchange:hover {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/apple.svg);
+}
+#GoogleExchange {
+  background-image: url(https://crozy.b2clogin.com/static/tenant/templates/idp_logos/colored/google.svg);
+}
+#GoogleExchange:hover {
+  background-image: url(https://crozy.b2clogin.com/static/tenant/templates/idp_logos/white/google.svg);
+}
+#LinkedInExchange {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/linkedin.svg);
+}
+#LinkedInExchange:hover {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/linkedin.svg);
+}
+#MicrosoftAccountExchange {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/microsoft.svg);
+}
+#MicrosoftAccountExchange:hover {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/microsoft.svg);
+}
+#TwitterExchange {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/colored/twitter.svg);
+}
+#TwitterExchange:hover {
+  background-image: url(https://login.microsoftonline.com/templates/src/idp_logos/white/twitter.svg);
+}

@@ -1,0 +1,74 @@
+# Node.js React Web App to Linux on Azure
+# Build a Node.js React app and deploy it to Azure as a Linux web app.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+parameters:
+- name: useSelfHosted
+  displayName: Use Self-Hosted Agents
+  type: boolean
+  default: false
+
+variables:
+- template: templates/variables.yml  # Template reference
+- name: connectedServiceNamePROD
+  value: 'Crozy Subscription PROD'
+- name: version.MajorMinor
+  value: '0.1' # Manually adjust the version number as needed for semantic versioning. Patch is auto-incremented.
+- name: version.Patch
+  value: $[counter(variables['version.MajorMinor'], 0)]
+- name: versionNumber
+  value: 'v$(version.MajorMinor).$(version.Patch)'
+
+stages:
+- stage: Build
+  displayName: Build & publish
+  jobs:
+  - template: templates/build-jobs.yml  # Template reference
+    parameters:
+      useSelfHosted: ${{ parameters.useSelfHosted }}
+      vmImageName: $(vmImageName)
+      containerRegistryServiceConnection: $(dockerConnectionServiceNameProd)
+      imageRepository: 'crozy-shop-app'
+      imageTags: |
+        $(versionNumber)
+        latest
+
+- template: templates/deploy-template.yml
+  parameters:
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    stageName: Deploy_Dev
+    displayName: 'Deploy on DEV'
+    vmImageName: $(vmImageName)
+    dependsOnStage: Build
+    connectedServiceNameARM: $(connectedServiceNameNonPROD)
+    acrName: $(acrName)
+    environment: 'dev'
+    imageTag: '$(versionNumber)'
+
+- template: templates/deploy-template.yml
+  parameters:
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    stageName: Deploy_Stg
+    displayName: 'Deploy on STAGING'
+    vmImageName: $(vmImageName)
+    dependsOnStage: Deploy_Dev
+    connectedServiceNameARM: $(connectedServiceNameNonPROD)
+    acrName: $(acrName)
+    environment: 'stg'
+    imageTag: '$(versionNumber)'
+
+- template: templates/deploy-template.yml
+  parameters:
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    stageName: Deploy_Prod
+    displayName: 'Deploy on PROD'
+    vmImageName: $(vmImageName)
+    dependsOnStage: Deploy_Stg
+    connectedServiceNameARM: $(connectedServiceNamePROD)
+    acrName: $(acrName)
+    environment: 'prod'
+    imageTag: '$(versionNumber)'

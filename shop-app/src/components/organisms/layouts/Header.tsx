@@ -1,0 +1,31 @@
+import * as React from "react";
+import Box, { BoxProps } from "@mui/joy/Box";
+
+export const Header = (props: BoxProps) => (
+  <Box
+    id="header"
+    component="header"
+    className="Header"
+    {...props}
+    sx={[
+      {
+        p: 2,
+        gap: 2,
+        bgcolor: "background.componentBg",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        gridColumn: "1 / -1",
+        borderBottom: "1px solid",
+        borderColor: "divider",
+        position: "sticky",
+        top: 0,
+        zIndex: 1100,
+      },
+      ...(Array.isArray(props.sx) ? props.sx : [props.sx]),
+    ]}
+  />
+);
+
+export default Header;
