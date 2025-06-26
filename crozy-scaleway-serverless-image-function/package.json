@@ -1,0 +1,24 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@scaleway/serverless-functions": "^1.1.2",
+    "@types/node": "^18.15.11",
+    "serverless-scaleway-functions": ">=0.4.14",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.812.0",
+    "dotenv": "^16.5.0",
+    "fastest-validator": "^1.19.1",
+    "sharp": "^0.34.2"
+  }
+}

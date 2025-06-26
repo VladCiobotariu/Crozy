@@ -1,0 +1,24 @@
+service: crozy-sf-image-service
+configValidationMode: off
+provider:
+  name: scaleway
+  runtime: node22
+
+plugins:
+  - serverless-scaleway-functions
+
+package:
+  patterns:
+    - "!node_modules/**"
+    - "!.gitignore"
+    - "!.git/**"
+
+functions:
+  image:
+    handler: image/handler.handle
+    env:
+      S3_ENDPOINT: ${.env:S3_ENDPOINT}
+      S3_REGION: ${.env:S3_REGION}
+      S3_BUCKET: ${.env:S3_BUCKET}
+      S3_ACCESS_KEY: ${.env:S3_ACCESS_KEY}
+      S3_SECRET_KEY: ${.env:S3_SECRET_KEY}
