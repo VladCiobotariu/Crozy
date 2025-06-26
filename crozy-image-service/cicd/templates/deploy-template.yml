@@ -1,0 +1,50 @@
+parameters:
+  - name: vmImageName
+    default: ''
+  - name: connectedServiceNameARM
+    default: ''
+  - name: displayName
+    default: ''
+  - name: stageName
+    default: ''
+  - name: runningCondition
+    default: ''
+  - name: functionAppName
+    default: ''
+  - name: dependsOnStage
+  - name: environment
+  - name: useSelfHosted
+    type: boolean
+    
+
+stages:
+  - stage: ${{ parameters.stageName }}
+    displayName: ${{ parameters.displayName }}
+    dependsOn: ${{ parameters.dependsOnStage }}
+    condition: and(${{ parameters.runningCondition }}, succeeded())
+
+    jobs:
+      - deployment: Deploy
+        displayName: Deploy
+        environment: ${{ parameters.environment }}
+        pool:
+          ${{ if eq(parameters.useSelfHosted, true) }}:
+            name: Default # Name of a pool.
+            demands: 
+              - Agent.OS -equals Linux
+              - Agent.OSArchitecture -equals X64
+          ${{ else }}:
+            vmImage: ${{ parameters.vmImageName }}
+        
+        strategy:
+          runOnce:
+            deploy:
+              
+              steps:
+              - task: AzureFunctionApp@2
+                displayName: 'Azure functions app deploy'
+                inputs:
+                  connectedServiceNameARM: ${{ parameters.connectedServiceNameARM }}
+                  appType: functionAppLinux
+                  appName: ${{ parameters.functionAppName }}
+                  package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'

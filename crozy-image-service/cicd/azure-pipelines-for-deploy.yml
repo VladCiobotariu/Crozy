@@ -1,0 +1,63 @@
+# Node.js Function App to Linux on Azure
+# Build a Node.js function app and deploy it to Azure as a Linux function app.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+parameters:
+- name: useSelfHosted
+  displayName: Use Self-Hosted Agents
+  type: boolean
+  default: false
+
+trigger:
+- main
+
+variables:
+- template: templates/variables.yml  # Template reference
+- name: connectedServiceNamePROD
+  value: 'Crozy Subscription PROD'
+
+stages:
+- stage: Build
+  displayName: Build
+  jobs: 
+  - template: templates/build-jobs.yml  # Template reference
+    parameters:
+      useSelfHosted: ${{ parameters.useSelfHosted }}
+      vmImageName: $(vmImageName)      
+
+- template: templates/deploy-template.yml
+  parameters:
+    stageName: 'Deploy_Dev'
+    displayName: 'Deploy on DEV'
+    functionAppName: 'fa-crozy-images-dev'
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    runningCondition: ne(variables['Build.Reason'], 'PullRequest')
+    vmImageName: $(vmImageName)
+    connectedServiceNameARM: $(connectedServiceNameNonPROD)
+    dependsOnStage: Build
+    environment: 'dev'    
+
+- template: templates/deploy-template.yml
+  parameters:
+    stageName: 'Deploy_Stg'
+    displayName: 'Deploy on STAGING'
+    functionAppName: 'fa-crozy-images-stg'
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    runningCondition: ne(variables['Build.Reason'], 'PullRequest')
+    vmImageName: $(vmImageName)
+    connectedServiceNameARM: $(connectedServiceNameNonPROD)
+    dependsOnStage: 'Deploy_Dev'
+    environment: 'stg'
+
+- template: templates/deploy-template.yml
+  parameters:
+    stageName: 'Deploy_Prod'
+    displayName: 'Deploy on PROD'
+    functionAppName: 'fa-crozy-images-prod'
+    useSelfHosted: ${{ parameters.useSelfHosted }}
+    runningCondition: ne(variables['Build.Reason'], 'PullRequest')
+    vmImageName: $(vmImageName)
+    connectedServiceNameARM: $(connectedServiceNamePROD)
+    dependsOnStage: 'Deploy_Stg'
+    environment: 'prod'
+

@@ -1,0 +1,48 @@
+parameters:
+  - name: vmImageName
+  - name: useSelfHosted
+    type: boolean
+    
+
+jobs:
+- job: Build
+  displayName: Build
+  pool:
+    ${{ if eq(parameters.useSelfHosted, true) }}:
+      name: Default # Name of a pool.
+      demands: 
+        - Agent.OS -equals Linux
+        - Agent.OSArchitecture -equals X64
+    ${{ else }}:
+      vmImage: ${{ parameters.vmImageName }}
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  # - script: |
+  #     if [ -f extensions.csproj ]
+  #     then
+  #         dotnet build extensions.csproj --runtime ubuntu.16.04-x64 --output ./bin
+  #     fi
+  #   displayName: 'Build extensions'
+
+  - script: |
+      npm install
+      npm run build --if-present
+      npm run test --if-present
+    displayName: 'Prepare binaries'
+
+  - task: ArchiveFiles@2
+    displayName: 'Archive files'
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+      includeRootFolder: false
+      archiveType: zip
+      archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      replaceExistingArchive: true
+
+  - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+    artifact: drop
