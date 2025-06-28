@@ -1,3 +1,5 @@
+URL git: [https://github.com/VladCiobotariu/Crozy](https://github.com/VladCiobotariu/Crozy)
+
 # GHID RULARE LOCALĂ
 
 ## CERINȚE
@@ -79,7 +81,7 @@ Pentru a rula baza de date local, putem folosi următoarea comandă:
 docker run --name crozy-local -e POSTGRES_PASSWORD=azuBIok32 -d -p 5432:5432 postgres
 ```
 
-Mai apoi, putem rula proiectul `Crozy.DbMigration.App` din cadrul folderului `crozy-backend`. Acest proiect conține un fișier c`onfig.example.json`.
+Mai apoi, putem rula proiectul `Crozy.DbMigration.App` din cadrul folderului `crozy-backend`. Acest proiect conține un fișier `onfig.example.json`.
 
 Trebuie să creăm un fișier `config.json` cu datele specifice, unde să avem `create-database` în câmpul `action`.
 
@@ -97,7 +99,13 @@ Dacă nu știm de unde să preluăm variabilele din Azure, putem consulta proiec
 
 ⸻
 
-1. Interfețele cu utilizatorul
+## 8. Pornirea logicii din spate (backend)
+
+Pornirea se va face utilizând funcțiile din IDE-ul specific utilizat, poate fi Visual Studio, Visual Studio Code împreună cu configurarile specifice sau JetBrains Rider. Se va porni proiect `Crozy.GraphQLApi`. Se poate porni și utilizănd comanda `dotent run`.
+
+⸻
+
+## 9. Interfețele cu utilizatorul
 
 Acestea pot fi ușor rulate cu:
 ```bash
