@@ -119,7 +119,3 @@ PS: Secretul pentru Next.js se generează astfel:
 ```bash
 openssl rand -base64 32
 ```
-
-⸻
-
-🎉 Acum avem un proiect complet funcțional!
