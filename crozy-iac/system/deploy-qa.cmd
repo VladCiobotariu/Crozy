@@ -1,1 +1,0 @@
-az deployment sub create --template-file main.bicep --location WestEurope --parameters env=qa

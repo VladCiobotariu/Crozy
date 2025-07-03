@@ -94,7 +94,7 @@ resource managedCertificate 'Microsoft.App/managedEnvironments/managedCertificat
   }
 }
 
-resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
+resource containerApp 'Microsoft.App/containerApps@2024-10-02-preview' = {
   name: containerAppName
   location: location
   identity: {
@@ -137,7 +137,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           {
             name: customDomain == '' ? 'custom-domain-placeholder-${systemName}-${systemComponentName}-${env}.net' : customDomain
             certificateId: managedCertificate.id
-            bindingType: 'SniEnabled'
+            bindingType: 'auto'
           }
         ]
       }

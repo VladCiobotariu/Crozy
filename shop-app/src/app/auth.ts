@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import AzureB2C from "next-auth/providers/azure-ad-b2c";
+import AzureB2C, { AzureADB2CProfile } from "next-auth/providers/azure-ad-b2c";
 import type { Account, NextAuthConfig, Profile, User } from "next-auth";
 import { b2cHostUrl } from "@/lib/azureB2CUtils";
 import { gql } from "@apollo/client";
@@ -20,6 +20,15 @@ export const config: NextAuthConfig = {
       clientId: getRequiredVariable("AZURE_AD_B2C_CLIENT_ID"),
       clientSecret: getRequiredVariable("AZURE_AD_B2C_CLIENT_SECRET"),
       primaryUserFlow: getRequiredVariable("AZURE_AD_B2C_PRIMARY_USER_FLOW"),
+      profile: (profile) => {
+        const newProfile = profile as AzureADB2CProfile & {given_name: string, family_name: string}
+        return {
+          ...newProfile,
+          id: profile.sub,
+          email: newProfile?.emails?.[0],
+          name: `${newProfile.given_name} ${newProfile.family_name}`
+        };
+      },
       issuer: getRequiredVariable("AZURE_AD_B2C_ISSUER_URL"),
       authorization: {
         url: getRequiredVariable("AZURE_AD_B2C_AUTHORIZATION_URL"),
@@ -36,7 +45,7 @@ export const config: NextAuthConfig = {
     }),
   ],
   callbacks: {
-    jwt: async ({ token, profile, account }) => {
+    jwt: async ({ token, profile, account, user }) => {
       if (account && profile) {
         token.accessToken = account.access_token;
         token.accessTokenExpires = account.expires_at! * 1000;
@@ -56,7 +65,7 @@ export const config: NextAuthConfig = {
       return baseUrl;
     },
   },
-  secret: getRequiredVariable("NEXTAUTH_SECRET"),
+  secret: getRequiredVariable("AUTH_SECRET"),
   session: {
     strategy: "jwt",
   },

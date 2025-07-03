@@ -18,19 +18,6 @@ namespace Crozy.GraphQLApi
             this.options = options;
         }
 
-        [Function("seed-timer")]
-        public IActionResult SetupDb([TimerTrigger("99999.00:00:00", RunOnStartup = true)] TimerInfo timerInfo)
-        {
-            if (!options.Value.DbSeedEnabled)
-            {
-                return new BadRequestObjectResult(new { message="Seed functionality is disabled" });
-            }
-
-            dbSeederService.Initialize();
-
-            return new OkObjectResult(new SeedResponse("In Memory DB initialized with success"));
-        }
-
         [Function("seed")]
         public IActionResult Seed(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "seed")]

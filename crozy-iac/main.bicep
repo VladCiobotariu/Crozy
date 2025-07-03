@@ -48,7 +48,10 @@ param backendCustomFQDN string = ''
 param dbSeedEnabled bool
 
 @allowed([ 'centralus', 'eastus2', 'eastasia', 'westeurope', 'westus2', 'germanywestcentral' ])
-param backendLocation string = 'westeurope' 
+param backendLocation string = 'westeurope'
+
+@allowed([ 'centralus', 'eastus2', 'eastasia', 'westeurope', 'westus2' ])
+param imageServiceLocation string = 'westeurope'
 
 @allowed([ 'centralus', 'eastus2', 'eastasia', 'westeurope', 'westus2', 'germanywestcentral' ])
 param containerAppLocation string = 'westeurope' 
@@ -62,6 +65,7 @@ module system 'system/main.bicep' = {
   name: 'system'
   scope: envRG
   params: {
+    imageServiceLocation: imageServiceLocation
     featureFlagExtraOptionsEnabled: featureFlagExtraOptionsEnabled
     featureFlagForShowingCardPayments: featureFlagForShowingCardPayments
     dbSeedEnabled: dbSeedEnabled

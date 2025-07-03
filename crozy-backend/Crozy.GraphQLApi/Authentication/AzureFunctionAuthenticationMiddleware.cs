@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Net;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http.Features.Authentication;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Middleware;
@@ -21,6 +22,31 @@ namespace Crozy.GraphQLApi.Authentication
             {
                 // The function is not processing an HTTP trigger. Execution can continue.
                 await next(context);
+                return;
+            }
+            
+            // Add CORS headers to all responses
+            var allowedOrigins = (Environment.GetEnvironmentVariable("Host__CORS") ?? "")
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            var requestOrigin = httpContext.Request.Headers["Origin"].FirstOrDefault();
+
+            if (!string.IsNullOrEmpty(requestOrigin) && allowedOrigins.Contains(requestOrigin, StringComparer.OrdinalIgnoreCase))
+            {
+                httpContext.Response.Headers["Access-Control-Allow-Origin"] = requestOrigin;
+                httpContext.Response.Headers["Vary"] = "Origin"; // Optional: informs caching proxies that this header varies
+            }
+
+            // CORS headers always needed
+            httpContext.Response.Headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS";
+            httpContext.Response.Headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, organisation-id, deafault-organisation, graphql-preflight";
+            httpContext.Response.Headers["Access-Control-Allow-Credentials"] = "true";
+
+            // Handle OPTIONS request early and return 200
+            if (httpContext.Request.Method.Equals("OPTIONS", StringComparison.OrdinalIgnoreCase))
+            {
+                httpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+                await httpContext.Response.CompleteAsync(); // Finalize response
                 return;
             }
 

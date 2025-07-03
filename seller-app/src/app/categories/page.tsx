@@ -7,7 +7,7 @@ import { HeaderProps, Table } from "../../components/moleculas";
 import TableConfig from "./TableConfig.json";
 import { ActionKeys } from "../../utils";
 import { Edit, Delete, Preview } from "@mui/icons-material";
-import {GetCategoriesDocument, useDeleteCategoryMutation, useGetCategoriesQuery} from "../../generated/graphql";
+import {GetCategoriesDocument, Role, useDeleteCategoryMutation, useGetCategoriesQuery} from "../../generated/graphql";
 import BackButton from "../../components/atoms/BackButton";
 import {useRouter} from "next/navigation";
 import DeleteModal from "../../components/moleculas/modals/DeleteModal";
@@ -19,9 +19,13 @@ const TableActionOptions: Array<any> = [
   { icon: <Delete />, label: "Delete", key: ActionKeys.delete },
 ];
 
+const TableActionOptionsNonAdmins: Array<any> = [
+  { icon: <Preview />, label: "View", key: ActionKeys.preview },
+];
+
 const ListCategories = () => {
   const router = useRouter();
-  const {organisationId} = useOrganisation()
+  const {organisationId, organisationRole} = useOrganisation()
   const { loading, error, data } = useGetCategoriesQuery({variables: {organisationId: organisationId}});
   const { Header }: { Header: Array<HeaderProps> } = TableConfig;
   const [open, setOpen] = useState<boolean>(false);
@@ -67,16 +71,18 @@ const ListCategories = () => {
       <DeleteModal open={open} handleClose={handleClose} onDeleteConfirm={onDeleteConfirm} entity="category"/>
       <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
         <BackButton href="/"/>
-        <Button component="a" variant="contained" LinkComponent={Link} href="/categories/create">
-          Create
-        </Button>
+        {(organisationRole === Role.Admin || organisationRole === Role.Owner) &&  
+          <Button component="a" variant="contained" LinkComponent={Link} href="/categories/create">
+            Create
+          </Button>
+        }
       </Box>
       <Box>
         <Table
           padding="normal"
           headers={Header}
           rows={data?.categories?.nodes}
-          tableActionOptions={TableActionOptions}
+          tableActionOptions={(organisationRole === Role.Admin || organisationRole === Role.Owner) ?  TableActionOptions : TableActionOptionsNonAdmins}
           onPreviewItem={id => router.push(`/categories/${id}`)}
           onEditItem={id=> router.push(`/categories/edit/${id}`)}
           onDeleteItem={id => onDeleteCategory(id)}

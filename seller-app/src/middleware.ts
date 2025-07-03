@@ -64,7 +64,7 @@ const shouldUpdateToken = (token: JWT) => {
 const middleware = async (req: NextRequest) => {
   const token = await getToken({
     req: req,
-    secret: process.env.NEXTAUTH_SECRET!,
+    secret: process.env.AUTH_SECRET!,
     secureCookie: secureCookie,
     salt: sessionCookie,
   });
@@ -100,7 +100,7 @@ const middleware = async (req: NextRequest) => {
       }
     }
     const newSessionToken = await encode({
-      secret: process.env.NEXTAUTH_SECRET!,
+      secret: process.env.AUTH_SECRET!,
       token: {
         ...token,
         ...newToken,

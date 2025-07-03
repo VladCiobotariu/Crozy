@@ -10,8 +10,8 @@ namespace Crozy.Infrastructure.PostgreSQL.ConnectionStrings
         {
             this.appEnvironment = appEnvironment;
         }
-        public string AppDbName => $"crozy-{appEnvironment.Name}";
+        public string AppDbName => $"pg-crozy-serverless";
 
-        public string RootDbName => "postgres";
+        public string RootDbName => "pg-crozy-serverless";
     }
 }

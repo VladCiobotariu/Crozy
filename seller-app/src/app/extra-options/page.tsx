@@ -6,11 +6,12 @@ import { HeaderProps, Table } from "../../components/moleculas";
 import TableConfig from "./TableConfig.json";
 import { ActionKeys, toDisplayedPrice } from "../../utils";
 import { Edit, Delete, Preview } from "@mui/icons-material";
-import { GetAllExtraOptionsPaginationDocument, GetAllExtraOptionsPaginationQuery, GetCreateProductDetailsDocument, PageInfo, useDeleteExtraOptionMutation, useGetAllExtraOptionsPaginationQuery, useGetExtraOptionsQuery} from "../../generated/graphql";
+import { GetAllExtraOptionsPaginationDocument, GetAllExtraOptionsPaginationQuery, GetCreateProductDetailsDocument, PageInfo, Role, useDeleteExtraOptionMutation, useGetAllExtraOptionsPaginationQuery, useGetExtraOptionsQuery} from "../../generated/graphql";
 import BackButton from "../../components/atoms/BackButton";
 import {useRouter} from "next/navigation";
 import DeleteModal from "@moleculas/modals/DeleteModal";
 import PaginatedTable from "@moleculas/PaginatedTable";
+import { useOrganisation } from "@/providers/OrganisationProvider";
 
 const TableActionOptions: Array<any> = [
   { icon: <Edit />, label: "Edit", key: ActionKeys.edit },
@@ -23,6 +24,8 @@ const ExtraOptions = () => {
   const { Header }: { Header: Array<HeaderProps> } = TableConfig;
 
   const isSmallSize = useMediaQuery(theme.breakpoints.down("md"));
+
+  const {organisationRole} = useOrganisation()
 
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -80,9 +83,11 @@ const ExtraOptions = () => {
       }}>
         <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
           <BackButton href="/"/>
-          <Button variant="contained" onClick={()=>router.push("/extra-options/create")}>
-            Create
-          </Button>
+          {(organisationRole === Role.Admin || organisationRole === Role.Owner) &&
+            <Button variant="contained" onClick={()=>router.push("/extra-options/create")}>
+              Create
+            </Button>
+          }
         </Box>
         <Box sx={{
           width: isSmallSize ? "fit-content" : "inherit"
@@ -96,7 +101,7 @@ const ExtraOptions = () => {
             </Box> :
             <PaginatedTable
               Header={Header}
-              TableActionOptions={TableActionOptions}
+              TableActionOptions={(organisationRole === Role.Admin || organisationRole === Role.Owner) ?  TableActionOptions : undefined}
               onPreviewItem={id => router.push(`/extra-options/${id}`)}
               onEditItem={id=> router.push(`/extra-options/edit/${id}`)}
               onDeleteItem={id => onDeleteExtraOption(id)}

@@ -7,14 +7,19 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import ImageDisplay from "../../atoms/imageDisplay/ImageDisplay";
-import { GetAllProductsDocument, Money, useDeleteProductMutation } from '../../../generated/graphql';
+import { GetAllProductsDocument, Money, Role, useDeleteProductMutation } from '../../../generated/graphql';
 import DeleteModal from "../../moleculas/modals/DeleteModal";
 import DataGridConfig from "../../moleculas/DataGridConfig";
+import { useOrganisation } from "@/providers/OrganisationProvider";
 
 const TableActionOptions: Array<any> = [
   { icon: <Preview />, label: "View", key: ActionKeys.preview },
   { icon: <Edit />, label: "Edit", key: ActionKeys.edit },
   { icon: <Delete />, label: "Delete", key: ActionKeys.delete },
+];
+
+const TableActionOptionsNonAdmins: Array<any> = [
+  { icon: <Preview />, label: "View", key: ActionKeys.preview },
 ];
 
 type CategoryType = {
@@ -48,6 +53,7 @@ type ProductListType = {
 const ProductList = ({ products }:ProductListType) => {
   
   const router = useRouter();
+  const {organisationRole} = useOrganisation();
   const [open, setOpen] = useState<boolean>(false);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);  
   const theme = useTheme();
@@ -157,7 +163,7 @@ const ProductList = ({ products }:ProductListType) => {
       renderCell: (params: GridRenderCellParams) => (
         <Menu
           iconButton
-          options={TableActionOptions}
+          options={(organisationRole === Role.Admin || organisationRole === Role.Owner) ?  TableActionOptions : TableActionOptionsNonAdmins}
           onClick={itemKey => {
             switch (itemKey) {
               case ActionKeys.edit:

@@ -7,7 +7,7 @@ function customHandlerGet(req: NextRequest) {
   const errorDescription = req.nextUrl.searchParams.get("error_description");
 
   if (errorDescription && errorDescription.includes(b2cPasswordResetCancelErrorCode)) {
-    return Response.redirect(process.env.NEXTAUTH_URL!)
+    return Response.redirect(process.env.AUTH_URL!)
   }
 
   return authGET(new NextRequest(req.url, req))

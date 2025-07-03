@@ -1,4 +1,5 @@
 ﻿using Azure;
+using Amazon.S3;
 using Azure.Identity;
 using Crozy.Domain.Buyers;
 using Crozy.Domain.Categories;
@@ -28,6 +29,7 @@ using Crozy.GraphQL.Sellers;
 using Crozy.GraphQL.Sites;
 using Crozy.GraphQL.Types;
 using Crozy.GraphQL.Users;
+using Crozy.Infrastructure.Application.Clients;
 using Crozy.Infrastructure.Clients;
 using Crozy.Infrastructure.Emails;
 using Crozy.Infrastructure.Providers;
@@ -44,16 +46,34 @@ namespace Crozy.Infrastructure.Application.Extensions
     {
         public static IServiceCollection AddApplicationInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IMediaServiceClient, MediaServiceClient>()
-                .AddAzureClients(x =>
+            var mediaProvider = configuration.GetValue<string>("MEDIA_STORAGE_PROVIDER");
+
+            if (mediaProvider == "Azure")
+            {
+                services.AddScoped<IMediaServiceClient, MediaServiceClient>();
+                services.AddAzureClients(x =>
                 {
                     var documentsStorageConfig = configuration.GetSection("ImageStorage");
                     x.AddBlobServiceClient(documentsStorageConfig);
-
                     x.AddEmailClient(configuration.GetSection("EmailService"));
-
                     x.UseCredential(new DefaultAzureCredential());
                 });
+            }
+            else if (mediaProvider == "S3")
+            {
+                services.AddScoped<IMediaServiceClient, AmazonMediaServiceClient>();
+                services.AddAWSService<IAmazonS3>();
+                services.AddAzureClients(x =>
+                {
+                    x.AddEmailClient(configuration.GetSection("EmailService"));
+                    x.UseCredential(new DefaultAzureCredential());
+                });
+            }
+            else
+            {
+                throw new Exception("Unknown media provider configuration");
+            }
+            
             services.AddScoped<IEmailService, EmailService>();
             services.AddOptions<GraphQLConfig>()
                 .Configure<IConfiguration>((settings, configuration) =>

@@ -60,7 +60,7 @@ const middleware = async (req: NextRequest) => {
 
   const token = await getToken({
     req,
-    secret: process.env.NEXTAUTH_SECRET!,
+    secret: process.env.AUTH_SECRET!,
     secureCookie: secureCookie,
     salt: sessionCookie,
   });
@@ -81,7 +81,7 @@ const middleware = async (req: NextRequest) => {
   } else if(shouldUpdateToken(token)){
     const newToken = await refreshAccessToken(token);
     const newSessionToken = await encode({
-      secret: process.env.NEXTAUTH_SECRET!,
+      secret: process.env.AUTH_SECRET!,
       token: {
         ...token,
         ...newToken,

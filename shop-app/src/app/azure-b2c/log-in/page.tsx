@@ -1,6 +1,6 @@
 const AzureB2CLoginPage = () => {
 
-  const homePageUrl = process.env.NEXTAUTH_URL;
+  const homePageUrl = process.env.AUTH_URL;
 
   return(
     <>

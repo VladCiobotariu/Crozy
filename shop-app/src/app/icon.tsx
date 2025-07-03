@@ -31,7 +31,7 @@ export default function Icon() {
           paddingBottom: "4px",
         }}
       >
-        <img src={new URL("logo.svg", process.env.NEXTAUTH_URL).toString()}/>
+        <img src={new URL("logo.svg", process.env.AUTH_URL).toString()}/>
       </div>
     ),
     // ImageResponse options

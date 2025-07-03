@@ -19,7 +19,7 @@ namespace Crozy.GraphQLApi
             _logger = logger;
         }
 
-        [Function("timerGraphQL")]
+        // [Function("timerGraphQL")]
         public async Task TimerActionResult([TimerTrigger("0 */3 * * * *", RunOnStartup = true)] TimerInfo timerInfo)
         {
             if (options.Value.PingTimerFunction)

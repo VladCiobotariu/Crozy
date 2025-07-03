@@ -57,7 +57,7 @@ export const config: NextAuthConfig = {
       return baseUrl;
     },
   },
-  secret: getRequiredVariable("NEXTAUTH_SECRET"),
+  secret: getRequiredVariable("AUTH_SECRET"),
   session: {
     strategy: "jwt",
   },

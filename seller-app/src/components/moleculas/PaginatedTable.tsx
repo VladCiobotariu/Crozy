@@ -15,7 +15,7 @@ export type PaginatedResult = {
 export type PaginatedTableProps = {
   sortBy?: string;
   Header: HeaderProps[];
-  TableActionOptions: Array<any>;
+  TableActionOptions: Array<any> | undefined;
   onDeleteItem?: (id: string) => void;
   onEditItem?: (id: string) => void;
   onPreviewItem?: (id: string) => void;

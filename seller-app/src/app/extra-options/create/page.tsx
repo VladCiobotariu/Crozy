@@ -27,13 +27,7 @@ const CreateExtraOption = ({searchParams}: {searchParams?: { categoryId: string 
       refetchQueries: [
         {
           query: GetAllExtraOptionsPaginationDocument,
-        },
-        {
-          query: GetExtraOptionCategoryWithExtraOptionsByIdDocument,
-          variables: {
-            id: searchParams?.categoryId
-          }
-        },
+        }
       ]
     });
     router.back();

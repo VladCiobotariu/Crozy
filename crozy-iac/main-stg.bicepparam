@@ -17,6 +17,9 @@ param azureAdB2cClientId = 'cd5f6b5b-fd29-40f5-8166-d30b9435b1f1'
 
 param dbConnectionString = 'Host=pg-crozy-non-prod.postgres.database.azure.com;Database=crozy-${env};Username=Crozy-DB-STG-RW;'
 
+param sellerAppCustomFQDN = 'seller.stg.crozy.ro'
+param shopAppCustomFQDN = 'stg.crozy.ro'
+
 param netopiaPaymentUri = 'http://sandboxsecure.mobilpay.ro'
 param netopiaPrivateKeySecretName = 'netopia-private-key-sandbox'
 param netopiaPublicKeySecretName = 'netopia-public-key-sandbox'

@@ -1,7 +1,12 @@
 # usage: dev (for rg-crozy-dev resource group), ts1 (for rg-crozy-ts1 resource group)
-$env = "dev"
-# usage: "Crozy Subscription Non-PROD" or "Crozy Subscription PROD"
-$subscriptionName = "Crozy Subscription PROD"
+$env = "demo"
+
+if ($env -eq "prod") {
+    $subscriptionName = "Crozy Subscription PROD"
+}
+else {
+    $subscriptionName = "Crozy Subscription Non-PROD"
+}
 
 Write-Output "Selected subscription '$subscriptionName'"
 

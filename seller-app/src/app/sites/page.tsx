@@ -8,7 +8,7 @@ import TableConfig from "./TableConfig.json";
 import { ActionKeys } from "../../utils";
 import { Edit, Delete, Preview } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
-import {GetSitesDocument, useDeleteSiteMutation, useGetSitesQuery} from "../../generated/graphql";
+import {GetSitesDocument, Role, useDeleteSiteMutation, useGetSitesQuery} from "../../generated/graphql";
 import BackButton from "../../components/atoms/BackButton";
 import DeleteModal from "../../components/moleculas/modals/DeleteModal";
 import { useOrganisation } from "../../providers/OrganisationProvider";
@@ -19,9 +19,13 @@ const TableActionOptions: Array<any> = [
   { icon: <Delete />, label: "Delete", key: ActionKeys.delete },
 ];
 
+const TableActionOptionsNonAdmins: Array<any> = [
+  { icon: <Preview />, label: "View", key: ActionKeys.preview },
+];
+
 const ListSites = () => {
   const router = useRouter();
-  const { organisationId } = useOrganisation()
+  const { organisationId, organisationRole } = useOrganisation()
   const {loading, error, data} = useGetSitesQuery({variables: {organisationId: organisationId}});
   const { Header }: { Header: Array<HeaderProps> } = TableConfig;
   const [open, setOpen] = useState<boolean>(false);
@@ -67,16 +71,18 @@ const ListSites = () => {
       <DeleteModal open={open} handleClose={handleClose} onDeleteConfirm={onDeleteConfirm} entity="site"/>
       <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
         <BackButton href="/"/>
-        <Button component="a" variant="contained" LinkComponent={Link} href="/sites/create">
-          Create
-        </Button>
+        {(organisationRole === Role.Admin || organisationRole === Role.Owner) &&
+          <Button component="a" variant="contained" LinkComponent={Link} href="/sites/create">
+            Create
+          </Button>
+        }
       </Box>
       <Box>
         <Table
           padding="normal"
           headers={Header}
           rows={data?.sites?.nodes}
-          tableActionOptions={TableActionOptions}
+          tableActionOptions={(organisationRole === Role.Admin || organisationRole === Role.Owner) ?  TableActionOptions : TableActionOptionsNonAdmins}
           onDeleteItem={id => onDeleteSite(id)}
           onPreviewItem={id => router.push(`/sites/${id}`)}
           onEditItem={id=> router.push(`/sites/edit/${id}`)}

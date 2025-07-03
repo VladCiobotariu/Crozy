@@ -5,7 +5,7 @@ const nextConfig = {
   output: "standalone",
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   experimental: {
-    instrumentationHook: true,
+    instrumentationHook: false,
   },
   async headers() {
     return [

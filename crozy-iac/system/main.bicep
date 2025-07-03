@@ -11,6 +11,9 @@ param featureFlagExtraOptionsEnabled string
 @allowed([ 'centralus', 'eastus2', 'eastasia', 'westeurope', 'westus2', 'germanywestcentral' ])
 param backendLocation string
 
+@allowed([ 'centralus', 'eastus2', 'eastasia', 'westeurope', 'westus2' ])
+param imageServiceLocation string = 'westeurope'
+
 @allowed([ 'centralus', 'eastus2', 'eastasia', 'westeurope', 'westus2', 'germanywestcentral' ])
 param containerAppLocation string
 
@@ -66,7 +69,7 @@ module imageService 'image-service.bicep' = {
   name: 'imageService'
   params: {
     env: env
-    location: backendLocation
+    location: imageServiceLocation
     applicationInsightsInstrumentationKey: appInsights.outputs.instrumentationKey
     customFQDN: imageServiceCustomFQDN
   }

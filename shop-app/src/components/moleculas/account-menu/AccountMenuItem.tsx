@@ -12,14 +12,15 @@ const AccountMenuItem = ({ displayName, link, icon, handleClick}: AccountMenuIte
 
   return (
     <Link href={link} onClick={handleClick}>
-        <Box sx={theme=>({
-            flexDirection: "row",
-            display: "flex",
-            gap: theme.spacing(2),
-        })}>
-            {icon}
-            {displayName}
-        </Box>
+      <Box sx={theme=>({
+        flexDirection: "row",
+        display: "flex",
+        gap: theme.spacing(2),
+        whiteSpace: "nowrap",
+      })}>
+        {icon}
+        {displayName}
+      </Box>
     </Link>
   );
 };
